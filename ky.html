@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source | 开源实验室 - Kang Chaokai</title>
+    <!-- 引入 Prism.js 主题用于代码高亮 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        /* --- 核心变量 --- */
+        :root {
+            --bg-color: #f4f4f4;
+            --text-main: #1a1a1a;
+            --text-sub: #555555;
+            --accent: #2c5c46;
+            --accent-light: #5ba685;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --glass-blur: blur(20px);
+            --cursor-size: 20px;
+            --transition-speed: 0.6s;
+            --font-main: "Helvetica Neue", Helvetica, "PingFang SC", sans-serif;
+            --font-display: "Playfair Display", serif;
+            --code-bg: #1d1f21;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #e0e0e0;
+            --text-sub: #a0a0a0;
+            --accent: #5ba685;
+            --accent-light: #2c5c46;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1), color var(--transition-speed);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- 鼠标 --- */
+        #cursor {
+            position: fixed; width: var(--cursor-size); height: var(--cursor-size);
+            border: 1px solid var(--text-main); border-radius: 50%; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference;
+        }
+        #cursor.hovered { width: 50px; height: 50px; background-color: var(--text-main); opacity: 0.5; border: none; }
+
+        /* --- 导航 --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            mix-blend-mode: difference; color: #fff;
+        }
+        .nav-left { display: flex; gap: 20px; align-items: center; }
+        .back-link { 
+            text-decoration: none; color: inherit; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; position: relative;
+        }
+        .back-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: #fff; transition: width 0.3s; }
+        .back-link:hover::after { width: 100%; }
+        .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; }
+        .nav-controls { display: flex; gap: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 页面主体 --- */
+        .container { max-width: 1200px; margin: 150px auto 100px; padding: 0 40px; }
+        .page-header { margin-bottom: 80px; }
+        h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 10px; }
+        .page-desc { color: var(--text-sub); font-size: 1.1rem; max-width: 600px; }
+
+        /* --- 新增：GitHub 按钮样式 --- */
+        .hero-actions { margin-top: 30px; display: flex; gap: 20px; align-items: center; }
+        
+        .btn-large {
+            padding: 12px 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-main);
+            display: inline-flex; align-items: center; gap: 12px;
+            text-decoration: none; color: var(--text-main);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            background: transparent;
+        }
+        
+        .btn-large:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .btn-large svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* --- 项目网格 --- */
+        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 60px; }
+        
+        .project-card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            backdrop-filter: var(--glass-blur); padding: 40px; border-radius: 4px;
+            transition: all 0.4s ease; display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 250px; position: relative; overflow: hidden;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--accent); }
+        
+        .card-header { margin-bottom: 20px; }
+        .card-tag { 
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px; 
+            border: 1px solid var(--text-sub); padding: 4px 10px; border-radius: 20px; 
+            display: inline-block; margin-bottom: 15px; opacity: 0.7; 
+        }
+        .card-title { font-size: 1.5rem; font-family: var(--font-display); margin-bottom: 10px; }
+        .card-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 20px; }
+
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 20px; border: 1px solid var(--text-main); background: transparent;
+            color: var(--text-main); text-transform: uppercase; font-size: 11px; letter-spacing: 1px;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn:hover { background: var(--text-main); color: var(--bg-color); }
+        .btn-icon { width: 14px; height: 14px; fill: currentColor; }
+
+        /* --- 源码展示区 --- */
+        .code-window {
+            background: var(--code-bg); border-radius: 8px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); margin-top: 20px;
+            max-height: 0; opacity: 0; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .code-window.open { max-height: 600px; opacity: 1; }
+        
+        .window-bar { background: #2d2d2d; padding: 10px 15px; display: flex; gap: 8px; align-items: center; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+        .window-title { color: #888; font-size: 12px; margin-left: 10px; font-family: monospace; }
+        .code-content { padding: 20px; overflow-y: auto; max-height: 560px; font-size: 13px; line-height: 1.5; }
+        .code-content::-webkit-scrollbar { width: 8px; height: 8px; }
+        .code-content::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        .code-content::-webkit-scrollbar-track { background: #1d1f21; }
+
+        /* --- 通用动画 --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .toast {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--accent); color: #fff; padding: 12px 30px; border-radius: 50px;
+            font-size: 14px; z-index: 1000; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 768px) {
+            .project-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .container { padding: 0 20px; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="cursor"></div>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="nav-left">
+            <div class="logo">K. OpenSource</div>
+            <a href="index.html" class="back-link trigger-hover">&larr; Back Home</a>
+        </div>
+        <div class="nav-controls">
+            <div class="trigger-hover" id="lang-btn">EN</div>
+            <div class="trigger-hover" id="theme-btn">DARK</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 头部 -->
+        <header class="page-header">
+            <h1 class="reveal" data-key="title">Open Source Lab</h1>
+            <p class="page-desc reveal" data-key="desc">Explore the code behind the innovation. Automation, networking, and media solutions.</p>
+            
+            <!-- 新增：GitHub 跳转按钮 -->
+            <div class="hero-actions reveal">
+                <a href="https://github.com/343188619" target="_blank" class="btn-large trigger-hover">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span data-key="btn_github">View Latest Projects on GitHub</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- 项目列表 -->
+        <div class="project-grid">
+            
+            <!-- 1. 视频平台 -->
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <span class="card-tag">Web Application</span>
+                    <div class="card-title" data-key="p1_title">Simple Video Platform</div>
+                    <div class="card-desc" data-key="p1_desc">A lightweight video streaming platform source code.</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766125956818_qdqqd_hpwok8.zip">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_copy">Copy Link</span>
+                    </button>
+                    <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766125956818_qdqqd_hpwok8.zip" class="btn trigger-hover">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4. 加密通讯 -->
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <span class="card-tag">Security</span>
+                    <div class="card-title" data-key="p4_title">Encrypted IM System</div>
+                    <div class="card-desc" data-key="p4_desc">Secure instant messaging system with end-to-end encryption architecture.</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125953492_qdqqd_j8do8g.zip">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_copy">Copy Link</span>
+                    </button>
+                    <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125953492_qdqqd_j8do8g.zip" class="btn trigger-hover">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. 荣耀截图工具 (含源码) -->
+        <div class="project-card reveal" style="margin-bottom: 30px;">
+            <div class="card-header">
+                <span class="card-tag">Automation / Python</span>
+                <div class="card-title" data-key="p2_title">Honor Auto-Screenshot Bot</div>
+                <div class="card-desc" data-key="p2_desc">Automated cloud login and device locating screenshot tool using Playwright.</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125955802_qdqqd_wsyz6u.py">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    <span data-key="btn_copy">Copy Link</span>
+                </button>
+                <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125955802_qdqqd_wsyz6u.py" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download .py
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-honor">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+
+            <!-- 代码窗口 -->
+            <div class="code-window" id="code-honor">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">Honor_Bot.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python">"""
+荣耀云登录-截图机器人（Windows 兼容版）
+"""
+import time
+import random
+import logging
+from datetime import datetime
+from pathlib import Path
+
+import schedule
+from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+
+# ---------- 参数 ----------
+LOGIN_URL = ("https://hnid-drcn.cloud.hihonor.com/CAS/portal/loginAuth.html?...") # URL truncated for brevity in display
+ACCOUNT = "###########"
+PASSWORD = "######"
+BASE_DIR = Path(__file__).parent.resolve()
+SCREENSHOT_DIR = BASE_DIR / "screenshots"
+LOG_FILE = BASE_DIR / "honor_spy.log"
+INTERVAL_MINUTES = 8
+PAGE_TIMEOUT = 30_000
+RETRY_MAX = 3
+
+# ---------- 日志 ----------
+SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.FileHandler(LOG_FILE, encoding="utf-8", delay=True),
+              logging.StreamHandler()]
+)
+log = logging.getLogger("honor_spy")
+
+# ---------- 工具 ----------
+def timestamp_filename() -> str:
+    # ✅ Windows 兼容：小时和分钟去前导零用 %#H 和 %#M
+    return datetime.now().strftime("%Y年%m月%d日%#H点%#M分.png")
+
+def random_sleep(a: float = 0.5, b: float = 1.5):
+    time.sleep(random.uniform(a, b))
+
+# ---------- 主流程 ----------
+def login_and_shot(page):
+    log.info("打开登录页")
+    page.goto(LOGIN_URL, timeout=PAGE_TIMEOUT)
+
+    log.info("输入账号")
+    account = page.locator('input[ht="input_pwdlogin_account"]')
+    account.click()
+    account.fill(ACCOUNT)
+    random_sleep()
+
+    log.info("输入密码")
+    pwd = page.locator('input[ht="input_pwdlogin_pwd"]')
+    pwd.click()
+    pwd.fill(PASSWORD)
+    random_sleep()
+
+    log.info("点击登录")
+    page.locator('div[ht="click_pwdlogin_submitLogin"]').click()
+
+    log.info("等待进入查找设备页")
+    loc_btn = page.locator('div.operation_button[aria-label="定位设备按钮"]')
+    loc_btn.wait_for(state="visible", timeout=PAGE_TIMEOUT)
+
+    log.info("点击【定位设备】5次")
+    for _ in range(5):
+        loc_btn.click()
+        time.sleep(0.8)
+
+    filename = SCREENSHOT_DIR / timestamp_filename()
+    page.screenshot(path=filename, full_page=True)
+    log.info("已截图 -> %s", filename)
+
+# ---------- 定时任务 ----------
+def job():
+    log.info("=== 定时任务开始 ===")
+    for attempt in range(1, RETRY_MAX + 1):
+        try:
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True, args=["--disable-gpu", "--no-sandbox"])
+                context = browser.new_context(
+                    viewport={"width": 1280, "height": 720},
+                    user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                )
+                page = context.new_page()
+                login_and_shot(page)
+                browser.close()
+                break
+        except PWTimeout:
+            log.warning("第 %s 次尝试超时，重试...", attempt)
+        except Exception as e:
+            log.exception("第 %s 次尝试异常: %s", attempt, e)
+    else:
+        log.error("已达到最大重试次数，放弃本次截图")
+    log.info("=== 定时任务结束 ===")
+
+# ---------- 入口 ----------
+if __name__ == "__main__":
+    log.info("荣耀云截图机器人启动，每 %s 分钟执行一次", INTERVAL_MINUTES)
+    schedule.every(INTERVAL_MINUTES).minutes.do(job)
+    job()  # 立即跑一次
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 局域网传输 (含源码) -->
+        <div class="project-card reveal">
+            <div class="card-header">
+                <span class="card-tag">Networking / Flask</span>
+                <div class="card-title" data-key="p3_title">LAN Cyber Drive</div>
+                <div class="card-desc" data-key="p3_desc">High-speed local network file transfer system with Cyberpunk UI.</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766126130810_qdqqd_6hw4wo.zip">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    <span data-key="btn_copy">Copy Link</span>
+                </button>
+                <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766126130810_qdqqd_6hw4wo.zip" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-lan">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+
+             <!-- 代码窗口 -->
+             <div class="code-window" id="code-lan">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">Cyber_Drive.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python">import os
+import socket
+import zipfile
+import io
+import time
+from flask import Flask, request, send_from_directory, jsonify, render_template_string, send_file
+
+# ================= 配置区域 =================
+UPLOAD_FOLDER = 'CYBER_DRIVE_STORAGE'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 * 1024  # 无限制
+
+# ================= 修复版前端代码 (刷新功能) =================
+HTML_TEMPLATE = """
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>极域 · 赛博传输终端</title>
+    <!-- ... CSS styles omitted for brevity, see full source ... -->
+    <style>
+        :root { --bg-deep: #050505; --neon-blue: #00f3ff; }
+        body { background: var(--bg-deep); color: white; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CYBER DRIVE</h1>
+        <div id="dropZone">Drop Files Here</div>
+    </div>
+    <script>
+        // ... JavaScript logic for file upload/download ...
+    </script>
+</body>
+</html>
+"""
+
+@app.route('/')
+def index():
+    return render_template_string(HTML_TEMPLATE)
+
+@app.route('/list_files')
+def list_files_api():
+    try:
+        files = []
+        paths = sorted(os.listdir(app.config['UPLOAD_FOLDER']), key=lambda x: os.path.getmtime(os.path.join(app.config['UPLOAD_FOLDER'], x)), reverse=True)
+        for f in paths:
+            if not f.startswith('.'):
+                fp = os.path.join(app.config['UPLOAD_FOLDER'], f)
+                if os.path.isfile(fp):
+                    files.append({'name': f, 'size': os.path.getsize(fp)})
+        return jsonify(files)
+    except: return jsonify([])
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'files[]' not in request.files: return jsonify({'error': 'No file'}), 400
+    for f in request.files.getlist('files[]'):
+        if f.filename: f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+    return jsonify({'success': True})
+
+@app.route('/download/<path:filename>')
+def download_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def get_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+        s.close()
+    except: IP = '127.0.0.1'
+    return IP
+
+if __name__ == '__main__':
+    print(f"\n >>> 修复版已启动: http://{get_ip()}:5000 <<<\n")
+    app.run(host='0.0.0.0', port=5000, threaded=True)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Link Copied!</span>
+    </div>
+
+    <!-- Prism JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+    <script>
+        // --- 1. 语言包 ---
+        const i18n = {
+            zh: {
+                langBtn: "EN",
+                title: "开源实验室",
+                desc: "探索创新背后的代码逻辑。自动化脚本、网络传输与媒体解决方案。",
+                p1_title: "简易视频平台",
+                p1_desc: "轻量级视频流媒体平台源码，快速部署。",
+                p2_title: "荣耀自动截图机器人",
+                p2_desc: "基于 Playwright 的自动化云端登录与设备定位截图工具。",
+                p3_title: "局域网赛博传输",
+                p3_desc: "高速局域网文件传输系统，配备极具未来感的赛博朋克 UI。",
+                p4_title: "加密即时通讯系统",
+                p4_desc: "基于端到端加密架构的安全即时通讯系统源码。",
+                btn_copy: "复制链接",
+                btn_view: "查看源码",
+                btn_hide: "收起源码",
+                toast_msg: "链接已复制！",
+                btn_github: "访问 GitHub 主页浏览更多项目"
+            },
+            en: {
+                langBtn: "中文",
+                title: "Open Source Lab",
+                desc: "Explore the code behind the innovation. Automation, networking, and media solutions.",
+                p1_title: "Simple Video Platform",
+                p1_desc: "A lightweight video streaming platform source code.",
+                p2_title: "Honor Auto-Screenshot Bot",
+                p2_desc: "Automated cloud login and device locating screenshot tool using Playwright.",
+                p3_title: "LAN Cyber Drive",
+                p3_desc: "High-speed local network file transfer system with Cyberpunk UI.",
+                p4_title: "Encrypted IM System",
+                p4_desc: "Secure instant messaging system with end-to-end encryption architecture.",
+                btn_copy: "Copy Link",
+                btn_view: "View Source",
+                btn_hide: "Hide Source",
+                toast_msg: "Link Copied!",
+                btn_github: "View Latest Projects on GitHub"
+            }
+        };
+
+        let currentLang = 'zh'; 
+        let currentTheme = 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCursor();
+            initAnimations();
+            updateContent();
+            
+            // 绑定事件
+            document.getElementById('lang-btn').addEventListener('click', toggleLang);
+            document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+
+            // 复制代码展开逻辑
+            document.querySelectorAll('.toggle-code').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetWin = document.getElementById(targetId);
+                    
+                    if (targetWin.classList.contains('open')) {
+                        targetWin.classList.remove('open');
+                        updateBtnText(this, false);
+                    } else {
+                        targetWin.classList.add('open');
+                        updateBtnText(this, true);
+                    }
+                });
+            });
+
+            // 复制链接
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast();
+                    });
+                });
+            });
+        });
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateContent();
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            document.getElementById('theme-btn').innerText = currentTheme === 'light' ? 'DARK' : 'LIGHT';
+        }
+
+        function updateContent() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('toast-msg').innerText = data.toast_msg;
+
+            const mapping = {
+                '[data-key="title"]': data.title,
+                '[data-key="desc"]': data.desc,
+                '[data-key="p1_title"]': data.p1_title,
+                '[data-key="p1_desc"]': data.p1_desc,
+                '[data-key="p2_title"]': data.p2_title,
+                '[data-key="p2_desc"]': data.p2_desc,
+                '[data-key="p3_title"]': data.p3_title,
+                '[data-key="p3_desc"]': data.p3_desc,
+                '[data-key="p4_title"]': data.p4_title,
+                '[data-key="p4_desc"]': data.p4_desc,
+                '[data-key="btn_github"]': data.btn_github
+            };
+
+            for (const [selector, text] of Object.entries(mapping)) {
+                document.querySelectorAll(selector).forEach(el => el.innerText = text);
+            }
+            
+            document.querySelectorAll('[data-key="btn_copy"]').forEach(el => el.innerText = data.btn_copy);
+            
+            // 更新当前状态下的源码按钮文字
+            document.querySelectorAll('.toggle-code').forEach(btn => {
+                const targetId = btn.getAttribute('data-target');
+                const isOpen = document.getElementById(targetId).classList.contains('open');
+                updateBtnText(btn, isOpen);
+            });
+        }
+
+        function updateBtnText(btn, isOpen) {
+            const span = btn.querySelector('span');
+            span.innerText = isOpen ? i18n[currentLang].btn_hide : i18n[currentLang].btn_view;
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = e.clientX + 'px';
+            });
+            const hoverables = document.querySelectorAll('a, button, .trigger-hover, .project-card, .btn-large');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | 资源中心 - Kang Chaokai</title>
+    <style>
+        /* --- 复用核心变量 (保持一致性) --- */
+        :root {
+            --bg-color: #f4f4f4;
+            --text-main: #1a1a1a;
+            --text-sub: #555555;
+            --accent: #2c5c46;
+            --accent-light: #5ba685;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --glass-blur: blur(20px);
+            --cursor-size: 20px;
+            --transition-speed: 0.6s;
+            --font-main: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
+            --font-display: "Playfair Display", serif;
+            --danger: #d9534f;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #e0e0e0;
+            --text-sub: #a0a0a0;
+            --accent: #5ba685;
+            --accent-light: #2c5c46;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1), color var(--transition-speed);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- 自定义鼠标 --- */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid var(--text-main);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        #cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: var(--text-main);
+            opacity: 0.5;
+            border: none;
+        }
+
+        /* --- 导航栏 --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: #fff;
+        }
+
+        .nav-left { display: flex; gap: 20px; align-items: center; }
+        .back-link { 
+            text-decoration: none; 
+            color: inherit; 
+            text-transform: uppercase; 
+            font-size: 12px; 
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .back-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: #fff; transition: width 0.3s;
+        }
+        .back-link:hover::after { width: 100%; }
+
+        .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; }
+        .nav-controls { display: flex; gap: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 页面主体 --- */
+        .container {
+            max-width: 1200px;
+            margin: 150px auto 100px;
+            padding: 0 40px;
+        }
+
+        .page-header {
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+        }
+        
+        .page-desc {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* --- 资源列表布局 --- */
+        .category-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin: 60px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .category-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* --- 资源卡片设计 --- */
+        .res-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: var(--glass-blur);
+            padding: 30px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .res-card:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255, 0.05);
+            border-color: var(--accent);
+        }
+
+        .res-info { flex: 1; padding-right: 20px; }
+        
+        .res-tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-sub);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            opacity: 0.7;
+        }
+
+        .res-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-family: var(--font-main);
+        }
+
+        .res-meta {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-family: monospace; /* 科技感 */
+        }
+
+        .res-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* --- 按钮设计 --- */
+        .btn {
+            padding: 12px 24px;
+            border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .btn-icon { width: 14px; height: 14px; fill: currentColor; }
+
+        /* --- 动画类 --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- 弹窗 (Toast & Modal) --- */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: var(--bg-color);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--danger);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.active .modal-box { transform: scale(1); opacity: 1; }
+
+        .modal-title { color: var(--danger); font-size: 1.5rem; margin-bottom: 15px; font-family: var(--font-display); }
+        .modal-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: flex-end; }
+        .btn-danger { border-color: var(--danger); color: var(--danger); }
+        .btn-danger:hover { background: var(--danger); color: #fff; }
+
+        @media (max-width: 768px) {
+            .res-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .res-actions { width: 100%; }
+            .btn { flex: 1; justify-content: center; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div id="cursor"></div>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="nav-left">
+            <div class="logo">K. Resources</div>
+            <a href="index.html" class="back-link trigger-hover">&larr; Back Home</a>
+        </div>
+        <div class="nav-controls">
+            <div class="trigger-hover" id="lang-btn">EN</div>
+            <div class="trigger-hover" id="theme-btn">DARK</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 头部 -->
+        <header class="page-header">
+            <h1 class="reveal" data-key="title">Resource Library</h1>
+            <p class="page-desc reveal" data-key="desc">Selected system images and utility tools. Curated for performance and stability.</p>
+        </header>
+
+        <!-- 操作系统 -->
+        <div class="category-title reveal" data-key="cat_os">Operating Systems</div>
+        <div class="resource-grid">
+            
+            <!-- Win 11 Business -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Recommended</span>
+                    <div class="res-title">Windows 11 (Business Editions)</div>
+                    <div class="res-meta">Version 25H2 (Dec 2025) · x64 · 7.68 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:c46a16eb293e3386d1e4b717624c83086aae7e02&dn=zh-cn_windows_11_business_editions_version_25h2_updated_dec_2025_x64_dvd_5aa0bca1.iso&xl=8245350400">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 11 Consumer -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Standard</span>
+                    <div class="res-title">Windows 11 (Consumer Editions)</div>
+                    <div class="res-meta">Version 25H2 (Dec 2025) · x64 · 7.76 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:808632e57ba30de8f564ec8e62ffdbe495c7bcae&dn=zh-cn_windows_11_consumer_editions_version_25h2_updated_dec_2025_x64_dvd_115b2867.iso&xl=8330770432">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 10 Business -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Stable</span>
+                    <div class="res-title">Windows 10 (Business Editions)</div>
+                    <div class="res-meta">Version 22H2 (Oct 2025) · x64 · 6.51 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:aed8ca03ed278466c4a35d509bf864051b533011&dn=zh-cn_windows_10_business_editions_version_22h2_updated_oct_2025_x64_dvd_d4e92df7.iso&xl=6985566208">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 10 Consumer -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">LTSC 2021 Base</span>
+                    <div class="res-title">Windows 10 (Consumer / LTSC)</div>
+                    <div class="res-meta">Version 22H2 (Oct 2025) · x64 · 4.70 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:366ADAA52FB3639B17D73718DD5F9E3EE9477B40&dn=SW_DVD9_WIN_ENT_LTSC_2021_64BIT_ChnSimp_MLF_X22-84402.ISO&xl=5044211712">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 7 English -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Legacy</span>
+                    <div class="res-title">Windows 7 Ultimate SP1 (English)</div>
+                    <div class="res-meta">Build 7601.24214 · x64 · 5.47 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:0499F84DB242096F2185E38B696CD3D6C8D0E62C&dn=7601.24214.180801-1700.win7sp1_ldr_escrow_CLIENT_ULTIMATE_x64FRE_en-us.iso&xl=5876357120">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 7 Chinese -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Legacy</span>
+                    <div class="res-title">Windows 7 Ultimate SP1 (Chinese)</div>
+                    <div class="res-meta">Standard MSDN · x64 · 3.19 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:E86414F638E11104248108B155BE9408A8362509&dn=cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso&xl=3420557312">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 实用工具 -->
+        <div class="category-title reveal" data-key="cat_tools">Utilities</div>
+        <div class="resource-grid">
+            
+            <!-- Activation Tool -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag" style="border-color: var(--danger); color: var(--danger);">Sensitive</span>
+                    <div class="res-title" data-key="tool_act_title">M365 / Office / Windows Activator</div>
+                    <div class="res-meta" data-key="tool_act_meta">RAR Archive · Comprehensive Activation Suite</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn btn-danger trigger-hover" id="activate-dl-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766124992995_qdqqd_63sgce.rar">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        <span data-key="btn_download">Download</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Music Tool -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Multimedia</span>
+                    <div class="res-title" data-key="tool_music_title">Music Downloader</div>
+                    <div class="res-meta" data-key="tool_music_meta">High Quality Audio Source Tool</div>
+                </div>
+                <div class="res-actions">
+                    <a href="https://coss.yupoo.com/upchat/2025-12-19/1766125352761.html" target="_blank" class="btn trigger-hover">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                        <span data-key="btn_visit">Visit Page</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 复制成功提示 (Toast) -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Magnet Link Copied!</span>
+    </div>
+
+    <!-- 病毒警示弹窗 (Modal) -->
+    <div class="modal-overlay" id="virus-modal">
+        <div class="modal-box">
+            <h3 class="modal-title" data-key="modal_title">Security Warning</h3>
+            <p data-key="modal_desc">This file may be identified as a virus by security software due to its activation nature. This is a false positive common with such tools.</p>
+            <br>
+            <p style="font-size: 0.9em; opacity: 0.8;" data-key="modal_sub">Please ensure you trust the source before proceeding. We are not responsible for any misuse.</p>
+            <div class="modal-btns">
+                <button class="btn trigger-hover" id="modal-cancel" data-key="modal_cancel">Cancel</button>
+                <a href="#" id="modal-confirm" class="btn btn-danger trigger-hover" data-key="modal_confirm">I Understand, Download</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. 语言包 ---
+        const i18n = {
+            zh: {
+                langBtn: "EN",
+                title: "资源中心",
+                desc: "精选系统镜像与实用工具。追求纯净、稳定与高效。",
+                cat_os: "操作系统镜像 (OS)",
+                cat_tools: "实用工具 (Utilities)",
+                btn_magnet: "复制磁力链接",
+                btn_download: "下载文件",
+                btn_visit: "访问页面",
+                tool_act_title: "M365 / Office / Windows 激活工具",
+                tool_act_meta: "RAR 压缩包 · 综合激活套件",
+                tool_music_title: "音乐下载工具",
+                tool_music_meta: "高品质音源获取工具",
+                toast_msg: "磁力链接已复制！",
+                modal_title: "安全风险提示",
+                modal_desc: "由于激活工具的特性，该文件可能会被杀毒软件误报为病毒。这是此类软件的常见情况。",
+                modal_sub: "请确保您了解风险并暂时关闭防护软件。本站不对使用后果负责。",
+                modal_cancel: "取消",
+                modal_confirm: "忽略警告并下载"
+            },
+            en: {
+                langBtn: "中文",
+                title: "Resource Library",
+                desc: "Selected system images and utility tools. Curated for performance and stability.",
+                cat_os: "Operating Systems",
+                cat_tools: "Utilities",
+                btn_magnet: "Copy Magnet",
+                btn_download: "Download",
+                btn_visit: "Visit Page",
+                tool_act_title: "M365 / Office / Windows Activator",
+                tool_act_meta: "RAR Archive · Comprehensive Activation Suite",
+                tool_music_title: "Music Downloader",
+                tool_music_meta: "High Quality Audio Source Tool",
+                toast_msg: "Magnet Link Copied!",
+                modal_title: "Security Warning",
+                modal_desc: "This file may be identified as a virus by security software due to its activation nature. This is a false positive.",
+                modal_sub: "Please ensure you trust the source. We are not responsible for any misuse.",
+                modal_cancel: "Cancel",
+                modal_confirm: "I Understand, Download"
+            }
+        };
+
+        let currentLang = 'zh'; // 默认中文
+        let currentTheme = 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCursor();
+            initAnimations();
+            updateContent();
+            setupInteractions();
+        });
+
+        // --- 2. 交互逻辑 ---
+        function setupInteractions() {
+            // 语言切换
+            document.getElementById('lang-btn').addEventListener('click', () => {
+                currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                updateContent();
+            });
+
+            // 主题切换
+            document.getElementById('theme-btn').addEventListener('click', () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', currentTheme);
+                document.getElementById('theme-btn').innerText = currentTheme === 'light' ? 'DARK' : 'LIGHT';
+            });
+
+            // 复制磁力链接
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const link = this.getAttribute('data-link');
+                    navigator.clipboard.writeText(link).then(() => {
+                        showToast();
+                    }).catch(err => {
+                        console.error('Copy failed', err);
+                        alert('Copy failed, please select manually.');
+                    });
+                });
+            });
+
+            // 激活工具弹窗逻辑
+            const modal = document.getElementById('virus-modal');
+            const actBtn = document.getElementById('activate-dl-btn');
+            const cancelBtn = document.getElementById('modal-cancel');
+            const confirmBtn = document.getElementById('modal-confirm');
+
+            actBtn.addEventListener('click', () => {
+                confirmBtn.setAttribute('href', actBtn.getAttribute('data-url'));
+                modal.classList.add('active');
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            
+            confirmBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                // Allow default link behavior
+            });
+
+            // 点击遮罩层关闭
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) modal.classList.remove('active');
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // --- 3. 内容更新 ---
+        function updateContent() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('toast-msg').innerText = data.toast_msg;
+
+            const mapping = {
+                '[data-key="title"]': data.title,
+                '[data-key="desc"]': data.desc,
+                '[data-key="cat_os"]': data.cat_os,
+                '[data-key="cat_tools"]': data.cat_tools,
+                '[data-key="tool_act_title"]': data.tool_act_title,
+                '[data-key="tool_act_meta"]': data.tool_act_meta,
+                '[data-key="tool_music_title"]': data.tool_music_title,
+                '[data-key="tool_music_meta"]': data.tool_music_meta,
+                '[data-key="modal_title"]': data.modal_title,
+                '[data-key="modal_desc"]': data.modal_desc,
+                '[data-key="modal_sub"]': data.modal_sub,
+                '[data-key="modal_cancel"]': data.modal_cancel,
+                '[data-key="modal_confirm"]': data.modal_confirm
+            };
+
+            for (const [selector, text] of Object.entries(mapping)) {
+                document.querySelectorAll(selector).forEach(el => el.innerText = text);
+            }
+
+            document.querySelectorAll('[data-key="btn_magnet"]').forEach(el => el.innerText = data.btn_magnet);
+            document.querySelectorAll('[data-key="btn_download"]').forEach(el => el.innerText = data.btn_download);
+            document.querySelectorAll('[data-key="btn_visit"]').forEach(el => el.innerText = data.btn_visit);
+        }
+
+        // --- 4. 动画与光标 ---
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = e.clientX + 'px';
+            });
+            const hoverables = document.querySelectorAll('a, button, .trigger-hover, .res-card');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+    </script>
+</body>
+</html>
