@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Lost in Void - Kang Chaokai</title>
+    <style>
+        /* --- 核心变量 (保持统一风格) --- */
+        :root {
+            --bg-color: #f4f4f4;
+            --text-main: #1a1a1a;
+            --text-sub: #555555;
+            --accent: #2c5c46;
+            --accent-light: #5ba685;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(255, 255, 255, 0.8);
+            --glass-blur: blur(20px);
+            --cursor-size: 20px;
+            --transition-speed: 0.6s;
+            --font-main: "Helvetica Neue", Helvetica, "PingFang SC", sans-serif;
+            --font-display: "Playfair Display", serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0a0a0a;
+            --text-main: #e0e0e0;
+            --text-sub: #a0a0a0;
+            --accent: #5ba685;
+            --accent-light: #2c5c46;
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1), color var(--transition-speed);
+            overflow: hidden; /* 禁止滚动，保持单屏艺术感 */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 自定义鼠标 --- */
+        #cursor {
+            position: fixed; top: 0; left: 0; width: var(--cursor-size); height: var(--cursor-size);
+            border: 1px solid var(--text-main); border-radius: 50%; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference;
+        }
+        #cursor.hovered { width: 50px; height: 50px; background-color: var(--text-main); opacity: 0.5; border: none; }
+
+        /* --- 导航 --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            mix-blend-mode: difference; color: #fff;
+        }
+        .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; }
+        .nav-controls { display: flex; gap: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* --- 主要内容区 --- */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- 艺术几何背景 --- */
+        .art-circle {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40vw; height: 40vw;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: breathe 10s infinite ease-in-out;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .art-circle::after {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 70%; height: 70%; border: 1px solid var(--text-sub); border-radius: 50%;
+            animation: rotate 20s infinite linear;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
+        }
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* --- 404 文字 --- */
+        .error-code {
+            font-family: var(--font-display);
+            font-size: clamp(8rem, 20vw, 20rem);
+            line-height: 0.8;
+            color: var(--text-main);
+            mix-blend-mode: overlay; /* 混合模式产生高级感 */
+            opacity: 0;
+            transform: translateY(50px);
+            filter: blur(10px);
+        }
+
+        .error-msg {
+            margin-top: 20px;
+            font-size: clamp(1rem, 1.5vw, 1.5rem);
+            color: var(--text-sub);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* --- 导航链接区 --- */
+        .action-links {
+            margin-top: 60px;
+            display: flex;
+            gap: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .link-item {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+        
+        .link-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .link-item:hover { color: var(--accent); }
+        .link-item:hover::before { transform: scaleX(1); transform-origin: left; }
+
+        /* --- 动画状态 --- */
+        .active {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            filter: blur(0) !important;
+            transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.5s; }
+
+        /* --- 页脚坐标 --- */
+        .coordinates {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-family: monospace;
+            font-size: 10px;
+            color: var(--text-sub);
+            opacity: 0.5;
+        }
+
+    </style>
+</head>
+<body data-theme="light">
+    <!-- 光标 -->
+    <div id="cursor"></div>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="logo">Kang.</div>
+        <div class="nav-controls">
+            <div class="trigger-hover" id="lang-btn">EN</div>
+            <div class="trigger-hover" id="theme-btn">DARK</div>
+        </div>
+    </nav>
+
+    <!-- 背景艺术 -->
+    <div class="art-circle"></div>
+
+    <!-- 主内容 -->
+    <main>
+        <div class="error-code delay-1">404</div>
+        <div class="error-msg delay-2" data-key="msg">
+            Lost in the digital wilderness.<br>This coordinate does not exist.
+        </div>
+
+        <div class="action-links delay-3">
+            <a href="index.html" class="link-item trigger-hover" data-key="home">Back Home</a>
+            <a href="zy.html" class="link-item trigger-hover" data-key="res">Resources</a>
+            <a href="ky.html" class="link-item trigger-hover" data-key="code">Open Source</a>
+        </div>
+    </main>
+
+    <!-- 装饰坐标 -->
+    <div class="coordinates">
+        LAT: NULL / LNG: NULL / ERR: PAGE_NOT_FOUND
+    </div>
+
+    <script>
+        // --- 1. 语言包 ---
+        const i18n = {
+            zh: {
+                langBtn: "EN",
+                msg: "迷失在数字荒野的深处。<br>该坐标似乎并不存在。",
+                home: "返回主页",
+                res: "前往资源库",
+                code: "查看开源代码"
+            },
+            en: {
+                langBtn: "中文",
+                msg: "Lost in the digital wilderness.<br>This coordinate does not exist.",
+                home: "Back Home",
+                res: "Resources",
+                code: "Open Source"
+            }
+        };
+
+        let currentLang = 'zh'; // 默认中文
+        let currentTheme = 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCursor();
+            initAnimations();
+            updateContent();
+
+            // 按钮事件
+            document.getElementById('lang-btn').addEventListener('click', () => {
+                currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                updateContent();
+            });
+
+            document.getElementById('theme-btn').addEventListener('click', () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', currentTheme);
+                document.getElementById('theme-btn').innerText = currentTheme === 'light' ? 'DARK' : 'LIGHT';
+            });
+        });
+
+        // --- 2. 内容更新 ---
+        function updateContent() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            
+            // 使用 innerHTML 以支持 <br> 换行
+            document.querySelector('[data-key="msg"]').innerHTML = data.msg;
+            document.querySelector('[data-key="home"]').innerText = data.home;
+            document.querySelector('[data-key="res"]').innerText = data.res;
+            document.querySelector('[data-key="code"]').innerText = data.code;
+        }
+
+        // --- 3. 入场动画 ---
+        function initAnimations() {
+            // 简单的顺序入场
+            setTimeout(() => document.querySelector('.error-code').classList.add('active'), 100);
+            setTimeout(() => document.querySelector('.error-msg').classList.add('active'), 300);
+            setTimeout(() => document.querySelector('.action-links').classList.add('active'), 600);
+        }
+
+        // --- 4. 鼠标跟随 ---
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = e.clientX + 'px';
+            });
+
+            const hoverables = document.querySelectorAll('a, .trigger-hover');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+    </script>
+</body>
+</html>
