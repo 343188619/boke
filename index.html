@@ -3,7 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANG CHAOKAI | 康朝凯</title>
+    
+    <!-- ================= SEO 核心优化区 START ================= -->
+    <title>康朝凯 (Kang Chaokai) | 环保实干家 & 科技探索者</title>
+    <meta name="description" content="康朝凯(Kang Chaokai)的个人官方网站。05后先锋、环保实干家、科技探索者，维科生态组织(WEPO)创始人兼主席，清蓝世行环保科技董事长。致力于以创新融合自然与技术。">
+    <meta name="keywords" content="康朝凯, Kang Chaokai, WEPO, 世界环境保护组织, 清蓝世行, 环保科技, 青年先锋, 联合国环境规划署, 开发者">
+    <meta name="author" content="康朝凯">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL 防止重复内容问题 (请确保网址准确) -->
+    <link rel="canonical" href="http://kck.wepo.top/">
+
+    <!-- Open Graph (OG) 社交分享标签 -->
+    <meta property="og:title" content="康朝凯 (Kang Chaokai) | 个人官方网站">
+    <meta property="og:description" content="05后先锋、环保实干家、世界环境保护组织(WEPO)创始人兼主席。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://kck.wepo.top/">
+    <meta property="og:site_name" content="康朝凯个人主页">
+
+    <!-- JSON-LD 结构化数据：帮助搜索引擎理解"实体" -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "康朝凯",
+      "alternateName": "Kang Chaokai",
+      "url": "http://kck.wepo.top/",
+      "jobTitle":["世界环境保护组织 (WEPO) 创始人兼主席", "清蓝世行环保科技董事长"],
+      "knowsAbout":["环境保护", "气候变化", "生物多样性", "Python开发", "前端开发", "社会企业"]
+    }
+    </script>
+    <!-- ================= SEO 核心优化区 END ================= -->
+
     <style>
         /* --- 核心变量与重置 --- */
         :root {
@@ -35,7 +66,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* 隐藏默认鼠标，使用自定义 */
+            cursor: none; 
         }
 
         body {
@@ -90,7 +121,7 @@
             align-items: center;
             z-index: 100;
             mix-blend-mode: difference;
-            color: #fff; /* 配合 difference 混合模式 */
+            color: #fff; 
         }
 
         .logo {
@@ -142,7 +173,7 @@
             font-size: clamp(3rem, 8vw, 8rem);
             line-height: 0.9;
             margin-bottom: 20px;
-            opacity: 0; /* 动画初始状态 */
+            opacity: 0; 
             transform: translateY(50px);
         }
 
@@ -217,7 +248,7 @@
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             padding: 40px;
-            border-radius: 4px; /* 偏向锐利风格 */
+            border-radius: 4px; 
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             display: flex;
             flex-direction: column;
@@ -336,7 +367,7 @@
             gap: 15px;
             z-index: 99;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: translateY(100px); /* 初始隐藏 */
+            transform: translateY(100px); 
             transition: transform 0.5s ease;
         }
 
@@ -424,75 +455,77 @@
     </nav>
 
     <!-- 头部 -->
+    <!-- SEO优化：确保静态HTML默认渲染中文，与<html lang="zh-CN">保持一致，避免爬虫抓取错乱 -->
     <header class="container hero">
-        <h1 id="hero-title" class="reveal">Kang Chaokai</h1>
+        <h1 id="hero-title" class="reveal">康朝凯</h1>
         <div class="subtitle reveal" id="hero-subtitle">
-            Visionary Gen Z · Eco-Activist · Tech Enthusiast<br>
-            Bridging nature and technology through innovation.
+            05后先锋 · 环保实干家 · 科技探索者<br>
+            以创新融合自然与技术，重新定义青年力量。
         </div>
-        <div class="scroll-indicator reveal">Scroll to Explore</div>
+        <div class="scroll-indicator reveal">向下探索</div>
     </header>
 
     <!-- 简历/成就区 -->
     <section class="container">
-        <div class="section-title reveal" data-key="about_title">Who am I</div>
+        <!-- SEO优化：使用 h2 赋予语义化层级 -->
+        <h2 class="section-title reveal" data-key="about_title">关于我</h2>
         
         <div class="bento-grid">
             <!-- WEPO -->
             <div class="card card-md reveal">
                 <div class="card-tag">WEPO Founder</div>
-                <h3 data-key="wepo_title">World Environmental Protection Organization</h3>
-                <p data-key="wepo_desc">Founded WEPO to unite global youth on climate change and biodiversity. Chairman of the organization.</p>
+                <h3 data-key="wepo_title">世界环境保护组织 (WEPO)</h3>
+                <p data-key="wepo_desc">创始人兼主席。汇聚全球青年力量，关注气候变化与生物多样性议题。</p>
             </div>
 
             <!-- Qinglan -->
             <div class="card card-md reveal">
                 <div class="card-tag">Entrepreneur</div>
-                <h3 data-key="qinglan_title">Qinglan Shihang Tech</h3>
-                <p data-key="qinglan_desc">Chairman of Qinglan Shihang (Chongqing) Environmental Technology. Exploring R&D and commercialization of eco-technologies.</p>
+                <h3 data-key="qinglan_title">清蓝世行环保科技</h3>
+                <p data-key="qinglan_desc">董事长。以社会企业模式探索环保技术的研发与商业化应用。</p>
             </div>
 
             <!-- Tech -->
             <div class="card card-sm reveal">
                 <div class="card-tag">Developer</div>
-                <h3 data-key="tech_title">Code & Nature</h3>
-                <p data-key="tech_desc">Python & HTML Developer. Empowering environmental protection with digital tools and data analysis.</p>
+                <h3 data-key="tech_title">科技赋能</h3>
+                <p data-key="tech_desc">Python开发者 & 前端工程师。用代码开发环境监测工具，数据驱动公益。</p>
             </div>
 
             <!-- Global -->
             <div class="card card-sm reveal">
                 <div class="card-tag">UNEP Member</div>
-                <h3 data-key="unep_title">Global Voice</h3>
-                <p data-key="unep_desc">Shared youth eco-innovation at the 2020 UN Climate Change Conference.</p>
+                <h3 data-key="unep_title">国际舞台</h3>
+                <p data-key="unep_desc">联合国环境规划署青年成员。曾在2020联合国气候大会分享青年创新实践。</p>
             </div>
             
              <!-- Sports -->
              <div class="card card-sm reveal">
                 <div class="card-tag">Lifestyle</div>
-                <h3 data-key="sport_title">Cycling & Badminton</h3>
-                <p data-key="sport_desc">Pursuing "Great Persistence" on the road and precision on the court. A balance of professional training and nature exploration.</p>
+                <h3 data-key="sport_title">骑行 & 羽毛球</h3>
+                <p data-key="sport_desc">不仅是爱好，更是对“漫长距离，伟大坚持”的专业诠释与身心磨砺。</p>
             </div>
         </div>
     </section>
 
     <!-- 核心功能跳转区 (左右分屏) -->
     <section class="action-zone">
-        <a href="zy.html" class="action-card reveal trigger-hover">
+        <a href="zy.html" class="action-card reveal trigger-hover" title="资源下载">
             <div class="action-content">
-                <div class="action-title">Resources</div>
-                <div class="action-desc" data-key="link_res">System Downloads</div>
+                <div class="action-title">资源下载</div>
+                <div class="action-desc" data-key="link_res">系统资源下载</div>
             </div>
         </a>
-        <a href="ky.html" class="action-card reveal trigger-hover">
+        <a href="ky.html" class="action-card reveal trigger-hover" title="开源代码">
             <div class="action-content">
-                <div class="action-title">Open Source</div>
-                <div class="action-desc" data-key="link_code">Code Repository</div>
+                <div class="action-title">开源代码</div>
+                <div class="action-desc" data-key="link_code">代码开源仓库</div>
             </div>
         </a>
     </section>
 
     <footer>
-        <span data-key="footer">© 2025 Kang Chaokai. Designed with Passion & Purpose.</span>
+        <span data-key="footer">© 2025 康朝凯. 极致设计与艺术的融合.</span>
     </footer>
 
     <!-- 播放器 -->
@@ -579,7 +612,10 @@
             initCursor();
             initAnimations();
             initAudio();
-            updateContent(); // 初始渲染中文
+            
+            // SEO 优化注释：移除初次加载强制 updateContent() 的调用，
+            // 避免因修改 DOM 导致爬虫抓取不到默认 HTML 静态内容，
+            // 只在用户主动点击按钮时再触发内容更新。
             
             // 绑定按钮事件
             document.getElementById('lang-btn').addEventListener('click', toggleLanguage);
@@ -630,12 +666,15 @@
 
             for (const [selector, text] of Object.entries(mapping)) {
                 const els = document.querySelectorAll(selector);
-                if(els.length > 0) els.forEach(el => el.innerHTML = text); // 使用innerHTML支持<br>
+                if(els.length > 0) els.forEach(el => el.innerHTML = text); 
                 else {
                     const el = document.getElementById(selector);
                     if(el) el.innerHTML = text;
                 }
             }
+            
+            // 动态更新 html lang 属性
+            document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en-US';
         }
 
         // --- 5. 主题切换 (Theme Switcher) ---
@@ -647,7 +686,6 @@
 
         // --- 6. 动画系统 (Animation System) ---
         function initAnimations() {
-            // Hero 文字进场
             setTimeout(() => {
                 document.getElementById('hero-title').classList.add('active');
             }, 300);
@@ -655,10 +693,10 @@
                 document.getElementById('hero-subtitle').classList.add('active');
             }, 600);
             setTimeout(() => {
-                document.querySelector('.scroll-indicator').style.opacity = 1;
+                const scrollInd = document.querySelector('.scroll-indicator');
+                if(scrollInd) scrollInd.style.opacity = 1;
             }, 1200);
 
-            // 滚动监听
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -679,7 +717,6 @@
                 cursor.style.left = e.clientX + 'px';
             });
 
-            // 悬停交互
             const hoverables = document.querySelectorAll('a, button, .trigger-hover, .control-btn, .card');
             hoverables.forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
@@ -697,16 +734,12 @@
             const eq = document.getElementById('eq-viz');
             const muteBtn = document.getElementById('mute-btn');
 
-            // 尝试自动播放
             const playPromise = audio.play();
             if (playPromise !== undefined) {
                 playPromise.then(_ => {
-                    // Autoplay started
                     isPlaying = true;
                     playerUI.classList.add('visible');
                 }).catch(error => {
-                    // Autoplay was prevented
-                    console.log("Autoplay prevented. Waiting for interaction.");
                     document.addEventListener('click', startAudioOnce);
                 });
             }
@@ -719,7 +752,6 @@
                 document.removeEventListener('click', startAudioOnce);
             }
 
-            // 播放/暂停控制
             btn.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play();
@@ -733,7 +765,6 @@
                 toggleIcons();
             });
 
-            // 静音控制
             muteBtn.addEventListener('click', () => {
                 audio.muted = !audio.muted;
                 muteBtn.style.opacity = audio.muted ? '0.3' : '1';
