@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Lab — Python Automation & Networking | Kang Chaokai</title>
+    <meta name="description" content="康朝凯（Kang Chaokai）的开源实验室：Python 自动化脚本、Flask 局域网传输、端到端加密通讯等开源项目源码与下载，探索自动化、网络与媒体解决方案。">
+    <meta name="keywords" content="康朝凯, Kang Chaokai, 开源实验室, Open Source, Python 自动化, Playwright, Flask, 局域网传输, 加密通讯, 源码下载, GitHub">
+    <meta name="author" content="康朝凯">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="theme-color" content="#eef6f0">
+    <meta name="theme-color" content="#0a1611" media="(prefers-color-scheme: dark)">
+    <link rel="canonical" href="https://kangchaokai.top/opensource.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://kangchaokai.top/opensource.html">
+    <link rel="alternate" hreflang="en-US" href="https://kangchaokai.top/opensource.html?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://kangchaokai.top/opensource.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0d'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23d4a853'%3EK%3C/text%3E%3C/svg%3E">
+    <meta property="og:title" content="开源实验室 - Python 自动化与网络项目 | 康朝凯">
+    <meta property="og:description" content="Python 自动化脚本、Flask 局域网传输、端到端加密通讯等开源项目源码与下载。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kangchaokai.top/opensource.html">
+    <meta property="og:site_name" content="康朝凯个人博客">
+    <meta property="og:image" content="https://kangchaokai.top/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="康朝凯个人博客 — 开源实验室">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="开源实验室 | 康朝凯 Kang Chaokai">
+    <meta name="twitter:description" content="Python 自动化、网络与媒体开源项目源码。">
+    <meta name="twitter:image" content="https://kangchaokai.top/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://kangchaokai.top/"},{"@type":"ListItem","position":2,"name":"开源实验室","item":"https://kangchaokai.top/opensource.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"开源实验室 - Python 自动化与网络项目源码","url":"https://kangchaokai.top/opensource.html","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"康朝凯个人博客","url":"https://kangchaokai.top/"},"about":{"@type":"Person","name":"康朝凯","alternateName":"Kang Chaokai","url":"https://kangchaokai.top/"}}</script>
+    <link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+    <link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- 引入 Prism.js 主题用于代码高亮 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        /* --- 核心变量（品牌统一：与主页一致的金色系） --- */
+        :root {
+            --bg-color: #fafaf8;
+            --text-main: #1a1a1a;
+            --text-sub: #6f6f6f;
+            --accent: #a87f24;
+            --accent-light: #d4a853;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(212, 168, 83, 0.25);
+            --glass-blur: blur(20px);
+            --cursor-size: 20px;
+            --transition-speed: 0.6s;
+            --font-main: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+            --font-display: "Noto Serif SC", "Georgia", serif;
+            --code-bg: #1d1f21;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0d0d0d;
+            --text-main: #e8e8e8;
+            --text-sub: #a0a0a0;
+            --accent: #d4a853;
+            --accent-light: #e8c876;
+            --card-bg: rgba(22, 22, 22, 0.6);
+            --card-border: rgba(212, 168, 83, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1), color var(--transition-speed);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- 鼠标 --- */
+        #cursor {
+            position: fixed; width: var(--cursor-size); height: var(--cursor-size);
+            border: 1px solid var(--text-main); border-radius: 50%; pointer-events: none;
+            z-index: 9999; transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference;
+        }
+        #cursor.hovered { width: 50px; height: 50px; background-color: var(--text-main); opacity: 0.5; border: none; }
+
+        /* --- 导航 --- */
+        nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 30px 40px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            mix-blend-mode: difference; color: #fff;
+        }
+        .nav-left { display: flex; gap: 20px; align-items: center; }
+        .back-link { 
+            text-decoration: none; color: inherit; text-transform: uppercase; 
+            font-size: 12px; letter-spacing: 1px; position: relative;
+        }
+        .back-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: #fff; transition: width 0.3s; }
+        .back-link:hover::after { width: 100%; }
+        .logo { font-family: var(--font-display); font-weight: 900; font-size: 24px; letter-spacing: 0.5px; color: var(--accent); text-transform: uppercase; }
+        .nav-controls { display: flex; gap: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 页面主体 --- */
+        .container { max-width: 1200px; margin: 150px auto 100px; padding: 0 40px; }
+        .page-header { margin-bottom: 80px; }
+        h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 10px; }
+        .page-desc { color: var(--text-sub); font-size: 1.1rem; max-width: 600px; }
+
+        /* --- 新增：GitHub 按钮样式 --- */
+        .hero-actions { margin-top: 30px; display: flex; gap: 20px; align-items: center; }
+        
+        .btn-large {
+            padding: 12px 30px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-main);
+            display: inline-flex; align-items: center; gap: 12px;
+            text-decoration: none; color: var(--text-main);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            background: transparent;
+        }
+        
+        .btn-large:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .btn-large svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* --- 项目网格 --- */
+        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 60px; }
+        
+        .project-card {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            backdrop-filter: var(--glass-blur); padding: 40px; border-radius: 4px;
+            transition: all 0.4s ease; display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 250px; position: relative; overflow: hidden;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--accent); }
+        
+        .card-header { margin-bottom: 20px; }
+        .card-tag { 
+            font-size: 10px; text-transform: uppercase; letter-spacing: 1px; 
+            border: 1px solid var(--text-sub); padding: 4px 10px; border-radius: 20px; 
+            display: inline-block; margin-bottom: 15px; opacity: 0.7; 
+        }
+        .card-title { font-size: 1.5rem; font-family: var(--font-display); margin-bottom: 10px; }
+        .card-desc { font-size: 0.95rem; color: var(--text-sub); margin-bottom: 20px; }
+
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn {
+            padding: 10px 20px; border: 1px solid var(--text-main); background: transparent;
+            color: var(--text-main); text-transform: uppercase; font-size: 11px; letter-spacing: 1px;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; text-decoration: none;
+        }
+        .btn:hover { background: var(--text-main); color: var(--bg-color); }
+        .btn-icon { width: 14px; height: 14px; fill: currentColor; }
+
+        /* --- 源码展示区 --- */
+        .code-window {
+            background: var(--code-bg); border-radius: 8px; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); margin-top: 20px;
+            max-height: 0; opacity: 0; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .code-window.open { max-height: 600px; opacity: 1; }
+        
+        .window-bar { background: #2d2d2d; padding: 10px 15px; display: flex; gap: 8px; align-items: center; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+        .window-title { color: #888; font-size: 12px; margin-left: 10px; font-family: monospace; }
+        .code-content { padding: 20px; overflow-y: auto; max-height: 560px; font-size: 13px; line-height: 1.5; }
+        .code-content::-webkit-scrollbar { width: 8px; height: 8px; }
+        .code-content::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        .code-content::-webkit-scrollbar-track { background: #1d1f21; }
+
+        /* --- 通用动画 --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .toast {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--accent); color: #fff; padding: 12px 30px; border-radius: 50px;
+            font-size: 14px; z-index: 1000; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        @media (max-width: 768px) {
+            .project-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2rem; }
+            .container { padding: 0 20px; }
+            .hero-actions { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.cells.min.js"></script>
+</head>
+<body data-theme="light">
+<div id="bg-vanta" aria-hidden="true" data-kck-persist></div>
+<script>(function(){if(window.self===window.top)return;try{document.body.classList.add('kck-child');}catch(e){}var boot=function(){try{var a=document.getElementById('bgm');if(a)a.remove();var p=document.getElementById('music-player');if(p)p.remove();}catch(e){}};document.addEventListener('DOMContentLoaded',boot);})();</script>
+    <div id="cursor"></div>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="nav-left">
+            <div class="logo">KCK · OpenSource</div>
+            <a href="index.html" class="back-link trigger-hover" data-key="back_home">&larr; Back Home</a>
+        </div>
+        <div class="nav-controls">
+            <div class="trigger-hover" id="lang-btn">EN</div>
+            <div class="trigger-hover" id="theme-btn">DARK</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 头部 -->
+        <header class="page-header">
+            <h1 class="reveal" data-key="title">Open Source Lab</h1>
+            <p class="page-desc reveal" data-key="desc">Source code and tools in automation, networking, and media processing — each with implementation notes.</p>
+            
+            <!-- 新增：GitHub 跳转按钮 -->
+            <div class="hero-actions reveal">
+                <a href="https://github.com/343188619" target="_blank" class="btn-large trigger-hover">
+                    <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <span data-key="btn_github">View Latest Projects on GitHub</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- 项目列表 -->
+        <div class="project-grid">
+            
+            <!-- 1. 视频平台 -->
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <span class="card-tag">Web Application</span>
+                    <div class="card-title" data-key="p1_title">Simple Video Platform</div>
+                    <div class="card-desc" data-key="p1_desc">Lightweight video streaming platform source code, with basic deployment notes.</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766125956818_qdqqd_hpwok8.zip">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_copy">Copy Link</span>
+                    </button>
+                    <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766125956818_qdqqd_hpwok8.zip" class="btn trigger-hover">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4. 加密通讯 -->
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <span class="card-tag">Security</span>
+                    <div class="card-title" data-key="p4_title">Encrypted IM System</div>
+                    <div class="card-desc" data-key="p4_desc">Secure instant messaging system with end-to-end encryption architecture.</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125953492_qdqqd_j8do8g.zip">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_copy">Copy Link</span>
+                    </button>
+                    <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125953492_qdqqd_j8do8g.zip" class="btn trigger-hover">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. 荣耀截图工具 (含源码) -->
+        <div class="project-card reveal" style="margin-bottom: 30px;">
+            <div class="card-header">
+                <span class="card-tag">Automation / Python</span>
+                <div class="card-title" data-key="p2_title">Honor Auto-Screenshot Bot</div>
+                <div class="card-desc" data-key="p2_desc">Automated cloud login and device locating screenshot tool using Playwright.</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125955802_qdqqd_wsyz6u.py">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    <span data-key="btn_copy">Copy Link</span>
+                </button>
+                <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5673241091_1766125955802_qdqqd_wsyz6u.py" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download .py
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-honor">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+
+            <!-- 代码窗口 -->
+            <div class="code-window" id="code-honor">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">Honor_Bot.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python">"""
+荣耀云登录-截图机器人（Windows 兼容版）
+"""
+import time
+import random
+import logging
+from datetime import datetime
+from pathlib import Path
+
+import schedule
+from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+
+# ---------- 参数 ----------
+LOGIN_URL = ("https://hnid-drcn.cloud.hihonor.com/CAS/portal/loginAuth.html?...") # URL truncated for brevity in display
+ACCOUNT = "###########"
+PASSWORD = "######"
+BASE_DIR = Path(__file__).parent.resolve()
+SCREENSHOT_DIR = BASE_DIR / "screenshots"
+LOG_FILE = BASE_DIR / "honor_spy.log"
+INTERVAL_MINUTES = 8
+PAGE_TIMEOUT = 30_000
+RETRY_MAX = 3
+
+# ---------- 日志 ----------
+SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.FileHandler(LOG_FILE, encoding="utf-8", delay=True),
+              logging.StreamHandler()]
+)
+log = logging.getLogger("honor_spy")
+
+# ---------- 工具 ----------
+def timestamp_filename() -> str:
+    # ✅ Windows 兼容：小时和分钟去前导零用 %#H 和 %#M
+    return datetime.now().strftime("%Y年%m月%d日%#H点%#M分.png")
+
+def random_sleep(a: float = 0.5, b: float = 1.5):
+    time.sleep(random.uniform(a, b))
+
+# ---------- 主流程 ----------
+def login_and_shot(page):
+    log.info("打开登录页")
+    page.goto(LOGIN_URL, timeout=PAGE_TIMEOUT)
+
+    log.info("输入账号")
+    account = page.locator('input[ht="input_pwdlogin_account"]')
+    account.click()
+    account.fill(ACCOUNT)
+    random_sleep()
+
+    log.info("输入密码")
+    pwd = page.locator('input[ht="input_pwdlogin_pwd"]')
+    pwd.click()
+    pwd.fill(PASSWORD)
+    random_sleep()
+
+    log.info("点击登录")
+    page.locator('div[ht="click_pwdlogin_submitLogin"]').click()
+
+    log.info("等待进入查找设备页")
+    loc_btn = page.locator('div.operation_button[aria-label="定位设备按钮"]')
+    loc_btn.wait_for(state="visible", timeout=PAGE_TIMEOUT)
+
+    log.info("点击【定位设备】5次")
+    for _ in range(5):
+        loc_btn.click()
+        time.sleep(0.8)
+
+    filename = SCREENSHOT_DIR / timestamp_filename()
+    page.screenshot(path=filename, full_page=True)
+    log.info("已截图 -> %s", filename)
+
+# ---------- 定时任务 ----------
+def job():
+    log.info("=== 定时任务开始 ===")
+    for attempt in range(1, RETRY_MAX + 1):
+        try:
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True, args=["--disable-gpu", "--no-sandbox"])
+                context = browser.new_context(
+                    viewport={"width": 1280, "height": 720},
+                    user_agent=("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+                )
+                page = context.new_page()
+                login_and_shot(page)
+                browser.close()
+                break
+        except PWTimeout:
+            log.warning("第 %s 次尝试超时，重试...", attempt)
+        except Exception as e:
+            log.exception("第 %s 次尝试异常: %s", attempt, e)
+    else:
+        log.error("已达到最大重试次数，放弃本次截图")
+    log.info("=== 定时任务结束 ===")
+
+# ---------- 入口 ----------
+if __name__ == "__main__":
+    log.info("荣耀云截图机器人启动，每 %s 分钟执行一次", INTERVAL_MINUTES)
+    schedule.every(INTERVAL_MINUTES).minutes.do(job)
+    job()  # 立即跑一次
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 局域网传输 (含源码) -->
+        <div class="project-card reveal">
+            <div class="card-header">
+                <span class="card-tag">Networking / Flask</span>
+                <div class="card-title" data-key="p3_title">LAN Cyber Drive</div>
+                <div class="card-desc" data-key="p3_desc">High-speed local network file transfer system with Cyberpunk UI.</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn trigger-hover copy-btn" data-url="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766126130810_qdqqd_6hw4wo.zip">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    <span data-key="btn_copy">Copy Link</span>
+                </button>
+                <a href="https://s3plus.meituan.net/opapisdk/op_ticket_1_5677168484_1766126130810_qdqqd_6hw4wo.zip" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                    Download
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-lan">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+
+             <!-- 代码窗口 -->
+             <div class="code-window" id="code-lan">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">Cyber_Drive.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python">import os
+import socket
+import zipfile
+import io
+import time
+from flask import Flask, request, send_from_directory, jsonify, render_template_string, send_file
+
+# ================= 配置区域 =================
+UPLOAD_FOLDER = 'CYBER_DRIVE_STORAGE'
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 * 1024  # 无限制
+
+# ================= 修复版前端代码 (刷新功能) =================
+HTML_TEMPLATE = """
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;极域 · 赛博传输终端&lt;/title&gt;
+    &lt;!-- ... CSS styles omitted for brevity, see full source ... --&gt;
+    &lt;style&gt;
+        :root { --bg-deep: #050505; --neon-blue: #00f3ff; }
+        body { background: var(--bg-deep); color: white; font-family: sans-serif; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;CYBER DRIVE&lt;/h1&gt;
+        &lt;div id="dropZone"&gt;Drop Files Here&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+        // ... JavaScript logic for file upload/download ...
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"""
+
+@app.route('/')
+def index():
+    return render_template_string(HTML_TEMPLATE)
+
+@app.route('/list_files')
+def list_files_api():
+    try:
+        files = []
+        paths = sorted(os.listdir(app.config['UPLOAD_FOLDER']), key=lambda x: os.path.getmtime(os.path.join(app.config['UPLOAD_FOLDER'], x)), reverse=True)
+        for f in paths:
+            if not f.startswith('.'):
+                fp = os.path.join(app.config['UPLOAD_FOLDER'], f)
+                if os.path.isfile(fp):
+                    files.append({'name': f, 'size': os.path.getsize(fp)})
+        return jsonify(files)
+    except: return jsonify([])
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    if 'files[]' not in request.files: return jsonify({'error': 'No file'}), 400
+    for f in request.files.getlist('files[]'):
+        if f.filename: f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
+    return jsonify({'success': True})
+
+@app.route('/download/<path:filename>')
+def download_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+def get_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(('10.255.255.255', 1))
+        IP = s.getsockname()[0]
+        s.close()
+    except: IP = '127.0.0.1'
+    return IP
+
+if __name__ == '__main__':
+    print(f"\n >>> 修复版已启动: http://{get_ip()}:5000 <<<\n")
+    app.run(host='0.0.0.0', port=5000, threaded=True)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Python NAS 多用户私有云盘 (GitHub / 含源码) -->
+        <div class="project-card reveal">
+            <div class="card-header">
+                <span class="card-tag">Web / Flask · GitHub</span>
+                <div class="card-title" data-key="p5_title">Python NAS · Multi-user Cloud Drive</div>
+                <div class="card-desc" data-key="p5_desc">A multi-user private cloud drive built with Flask + SQLAlchemy: per-user storage isolation, 50GB quota accounting, path-traversal guards, chunked streaming ZIP downloads, and RFC 5987 encoding for non-ASCII filenames.</div>
+            </div>
+            <div class="btn-group">
+                <a href="https://github.com/343188619/python-nas" target="_blank" rel="noopener" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-nas">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+            <div class="code-window" id="code-nas">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">nas/app.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python"># --- 每用户独立存储目录与配额统计 ---
+def get_user_dir(username):
+    path = os.path.join(app.config['STORAGE_ROOT'], username)
+    if not os.path.exists(path): os.makedirs(path)
+    return path
+
+def get_folder_size(start_path):
+    total_size = 0
+    with os.scandir(start_path) as it:
+        for entry in it:
+            if entry.is_file():
+                total_size += entry.stat().st_size
+            elif entry.is_dir():
+                total_size += get_folder_size(entry.path)
+    return total_size
+
+@app.route('/api/files', methods=['POST'])
+@login_required
+def list_files():
+    data = request.json
+    rel_path = data.get('path', '')
+    if '..' in rel_path: rel_path = ''   # 路径穿越防护：禁止跳出用户目录
+
+    base_dir = get_user_dir(current_user.username)
+    target_dir = os.path.join(base_dir, rel_path)
+    # ... 遍历目录，分别收集 folders / files，附带大小与修改时间 ...
+
+    used_size = get_folder_size(base_dir)
+    quota_info = {
+        'used': readable_size(used_size),
+        'total': readable_size(app.config['USER_QUOTA']),
+        'percent': min(100, (used_size / app.config['USER_QUOTA']) * 100)
+    }
+    return jsonify({'folders': folders, 'files': files, 'quota': quota_info})
+
+@app.route('/download_executor', methods=['POST'])
+@login_required
+def download_executor():
+    # ... 单文件：RFC 5987 编码中文文件名，避免移动端乱码
+    filename = quote(file_list[0])
+    rv = send_file(target, as_attachment=True, download_name=file_list[0])
+    rv.headers['Content-Disposition'] = f"attachment; filename*=UTF-8''{filename}"
+    return rv
+
+    # ... 多文件：临时 ZIP + 64KB 分块流式输出，内存占用恒定
+    with zipfile.ZipFile(temp_zip, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for fname in file_list:
+            abs_path = os.path.join(full_current_path, fname)
+            if os.path.isfile(abs_path):
+                zf.write(abs_path, fname)
+            elif os.path.isdir(abs_path):
+                for root, _, files_in_dir in os.walk(abs_path):
+                    for file in files_in_dir:
+                        zf.write(os.path.join(root, file),
+                                 os.path.relpath(os.path.join(root, file), full_current_path))
+
+    def generate():
+        with temp_zip:
+            while True:
+                chunk = temp_zip.read(65536)
+                if not chunk: break
+                yield chunk
+
+    return Response(stream_with_context(generate()),
+                    mimetype='application/zip',
+                    headers={'Content-Disposition': f'attachment; filename={download_name}'})
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. 大蓝本 Dalanben · Android 客户端 (GitHub / 含源码) -->
+        <div class="project-card reveal">
+            <div class="card-header">
+                <span class="card-tag">Android / Kotlin · GitHub</span>
+                <div class="card-title" data-key="p6_title">Dalanben · Android Client</div>
+                <div class="card-desc" data-key="p6_desc">Community app client built with Kotlin + Jetpack Compose: content feed, publishing, chat and watermarked downloads. Excerpt: progress-aware multipart upload via OkHttp + ForwardingSink.</div>
+            </div>
+            <div class="btn-group">
+                <a href="https://github.com/MarxKang/dalanben" target="_blank" rel="noopener" class="btn trigger-hover">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+                <button class="btn trigger-hover toggle-code" data-target="code-dalanben">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+            <div class="code-window" id="code-dalanben">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">data/ApiClient.kt</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-kotlin">/** 带上传进度回调的 RequestBody：writeTo 时统计已写字节, 回调进度(0~100) */
+class ProgressRequestBody(
+    private val delegate: RequestBody,
+    private val onProgress: (Float) -> Unit
+) : RequestBody() {
+    override fun contentType(): MediaType? = delegate.contentType()
+    override fun contentLength(): Long = delegate.contentLength()
+
+    override fun writeTo(sink: BufferedSink) {
+        val total = contentLength()
+        val counting = object : ForwardingSink(sink) {
+            private var sent = 0L
+            override fun write(source: Buffer, byteCount: Long) {
+                super.write(source, byteCount)
+                sent += byteCount
+                if (total > 0L) {
+                    val p = (sent * 100f / total).coerceIn(0f, 100f)
+                    onProgress(p)
+                }
+            }
+        }
+        val buffered = counting.buffer()
+        delegate.writeTo(buffered)
+        buffered.flush()
+    }
+}
+
+/** Multipart 上传：按需包装 ProgressRequestBody，获得 0~100 的进度回调 */
+suspend fun ApiService.uploadFile(
+    bizType: String,
+    file: File,
+    onProgress: ((Float) -> Unit)? = null
+): UploadResult {
+    val base = file.asRequestBody("application/octet-stream".toMediaType())
+    val reqFile = if (onProgress != null) ProgressRequestBody(base, onProgress) else base
+    val part = MultipartBody.Part.createFormData("file", file.name, reqFile)
+    val biz = bizType.toRequestBody("text/plain".toMediaType())
+    val resp = uploadLocal(part, biz)
+    return resp.data ?: throw IllegalStateException(resp.msg ?: "上传失败")
+}
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. 机房集中管理系统 · 被控端 (本地项目 / 含源码) -->
+        <div class="project-card reveal">
+            <div class="card-header">
+                <span class="card-tag">System / Python Stdlib</span>
+                <div class="card-title" data-key="p7_title">Lab Manager · Controlled-end Agent</div>
+                <div class="card-desc" data-key="p7_desc">A Windows agent built with pure Python standard library: remote terminal, file transfer, forced dialogs and screen streaming. Excerpt: screen capture via ctypes GDI BitBlt + GDI+ JPEG encoding inside a Per-Monitor V2 DPI-aware context.</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn trigger-hover toggle-code" data-target="code-agent">
+                    <svg class="btn-icon" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+                    <span data-key="btn_view">View Source</span>
+                </button>
+            </div>
+            <div class="code-window" id="code-agent">
+                <div class="window-bar">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                    <span class="window-title">agent.py</span>
+                </div>
+                <div class="code-content">
+<pre><code class="language-python">def capture_screen_jpeg(scale=1.0, quality=60):
+    """抓取全部屏幕并用 GDI+ 编码为 JPEG。返回 (bytes, width, height)。
+
+    采集全程在「Per-Monitor V2 的 DPI 感知上下文」里执行（_DpiCaptureScope）。
+    不这么做的话，在 4K + 显示缩放的机器上只会抓到左上角一块。
+    """
+    if not IS_WIN or not gdiplus_init():
+        raise OSError("当前环境不支持屏幕捕获")
+    scale = max(0.1, min(1.0, float(scale or 1.0)))
+    quality = max(1, min(100, int(quality or 60)))
+    with _DpiCaptureScope():
+        return _capture_screen_jpeg_inner(scale, quality)
+
+def _capture_screen_jpeg_inner(scale, quality):
+    with _gdi_lock:                     # GDI 句柄非线程安全，全局串行
+        vx, vy, vw, vh = screen_metrics()
+        hdc_screen = user32.GetDC(None)
+        hdc_mem = gdi32.CreateCompatibleDC(hdc_screen)
+        hbm = gdi32.CreateCompatibleBitmap(hdc_screen, vw, vh)
+        old = gdi32.SelectObject(hdc_mem, hbm)
+        try:
+            # 屏幕位图 -> 内存 DC
+            if not gdi32.BitBlt(hdc_mem, 0, 0, vw, vh, hdc_screen, vx, vy, SRCCOPY):
+                raise OSError("BitBlt 失败")
+            # HBITMAP -> GDI+ Image
+            if _gp.GdipCreateBitmapFromHBITMAP(hbm, None, ctypes.byref(img)) != 0:
+                raise OSError("GdipCreateBitmapFromHBITMAP 失败")
+
+            if scale < 0.999:           # 高质量双三次插值缩放，降低回传带宽
+                _gp.GdipSetInterpolationMode(gfx, 7)   # HighQualityBicubic
+                _gp.GdipDrawImageRectI(gfx, img, 0, 0, tw, th)
+
+            data = _save_gdiplus_image(img, FORMAT_JPEG, quality)
+            return data, tw, th
+        finally:                        # 逐层释放 GDI/GDI+ 句柄，防止泄漏
+            _gp.GdipDeleteGraphics(gfx)
+            _gp.GdipDisposeImage(img)
+            gdi32.SelectObject(hdc_mem, old)
+            gdi32.DeleteObject(hbm)
+            gdi32.DeleteDC(hdc_mem)
+            user32.ReleaseDC(None, hdc_screen)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">KCK</div>
+            <div class="footer-tagline">感谢你的到来，我们一起让世界更绿一点</div>
+            <div class="footer-copy">© 2026 康朝凯. All rights reserved.</div>
+        </div>
+        <div class="music-player" id="music-player" data-kck-persist>
+        <div class="play-btn-wrap" id="play-btn" title="播放/暂停">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </div>
+        <div class="player-eq" id="player-eq">
+            <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        </div>
+        <div class="player-label">ATMOS</div>
+    </div>
+
+    <audio id="bgm" loop autoplay playsinline crossorigin="anonymous" preload="auto" data-kck-persist>
+        <source src="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com/yy.mp3" type="audio/mpeg">
+    </audio>
+
+</footer>
+    <style>
+        footer { margin-top: 80px; padding: 48px 24px 40px; border-top: 1px solid var(--card-border); text-align: center; }
+        footer .footer-brand { font-family: var(--font-display); font-weight: 900; font-size: 28px; letter-spacing: 2px; color: var(--accent); }
+        footer .footer-tagline { margin-top: 12px; font-size: 14px; color: var(--text-sub); }
+        footer .footer-copy { margin-top: 8px; font-size: 12px; color: var(--text-sub); opacity: 0.7; }
+    </style>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Link Copied!</span>
+    </div>
+
+    <!-- Prism JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+
+    <script>
+        // --- 1. 语言包 ---
+        const i18n = {
+            zh: {
+                langBtn: "EN",
+                title: "开源实验室",
+                desc: "收录自动化脚本、网络传输、媒体处理与系统工具方向的源码与工具，均附实现说明。",
+                p1_title: "简易视频平台",
+                p1_desc: "轻量级视频流媒体平台源码，附基础部署流程。",
+                p2_title: "荣耀自动截图机器人",
+                p2_desc: "基于 Playwright 的自动化云端登录与设备定位截图工具。",
+                p3_title: "局域网赛博传输",
+                p3_desc: "高速局域网文件传输系统，采用赛博朋克风格界面。",
+                p4_title: "加密即时通讯系统",
+                p4_desc: "基于端到端加密架构的安全即时通讯系统源码。",
+                p5_title: "Python NAS · 多用户私有云盘",
+                p5_desc: "Flask + SQLAlchemy 实现的多用户网盘：每用户独立存储空间与配额统计、路径穿越防护、多文件打包 ZIP 分块流式下载，中文文件名按 RFC 5987 编码以兼容移动端。",
+                p6_title: "大蓝本 Dalanben · Android 客户端",
+                p6_desc: "Kotlin + Jetpack Compose 实现的社区 App 客户端：内容流、发布、即时聊天与作品水印下载。此处节选网络层带进度回调的 Multipart 上传实现（OkHttp + ForwardingSink）。",
+                p7_title: "机房集中管理系统 · 被控端",
+                p7_desc: "仅用 Python 标准库实现的 Windows 被控端：远程终端、文件传输、强制弹窗与屏幕直播。此处节选屏幕捕获——ctypes 调用 GDI BitBlt 抓屏、GDI+ 编码 JPEG，全程处于 Per-Monitor V2 DPI 感知上下文，4K + 缩放屏幕亦可完整采集。",
+                btn_copy: "复制链接",
+                btn_view: "查看源码",
+                btn_hide: "收起源码",
+                toast_msg: "链接已复制！",
+                btn_github: "访问 GitHub 主页浏览更多项目",
+                back_home: "← 返回首页"
+            },
+            en: {
+                langBtn: "中文",
+                title: "Open Source Lab",
+                desc: "Source code and tools in automation, networking, media processing, and systems programming — each with implementation notes.",
+                p1_title: "Simple Video Platform",
+                p1_desc: "Lightweight video streaming platform source code, with basic deployment notes.",
+                p2_title: "Honor Auto-Screenshot Bot",
+                p2_desc: "Automated cloud login and device locating screenshot tool using Playwright.",
+                p3_title: "LAN Cyber Drive",
+                p3_desc: "High-speed local network file transfer system with Cyberpunk UI.",
+                p4_title: "Encrypted IM System",
+                p4_desc: "Secure instant messaging system with end-to-end encryption architecture.",
+                p5_title: "Python NAS · Multi-user Cloud Drive",
+                p5_desc: "A multi-user private cloud drive built with Flask + SQLAlchemy: per-user storage isolation, 50GB quota accounting, path-traversal guards, chunked streaming ZIP downloads, and RFC 5987 encoding for non-ASCII filenames.",
+                p6_title: "Dalanben · Android Client",
+                p6_desc: "Community app client built with Kotlin + Jetpack Compose: content feed, publishing, chat and watermarked downloads. Excerpt: progress-aware multipart upload via OkHttp + ForwardingSink.",
+                p7_title: "Lab Manager · Controlled-end Agent",
+                p7_desc: "A Windows agent built with pure Python standard library: remote terminal, file transfer, forced dialogs and screen streaming. Excerpt: screen capture via ctypes GDI BitBlt + GDI+ JPEG encoding inside a Per-Monitor V2 DPI-aware context.",
+                btn_copy: "Copy Link",
+                btn_view: "View Source",
+                btn_hide: "Hide Source",
+                toast_msg: "Link Copied!",
+                btn_github: "View Latest Projects on GitHub",
+                back_home: "← Back Home"
+            }
+        };
+
+        let currentLang = 'zh'; 
+        let currentTheme = 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCursor();
+            initAnimations();
+            updateContent();
+            if(window.self===window.top){initAudio();}
+            
+            // 绑定事件
+            document.getElementById('lang-btn').addEventListener('click', toggleLang);
+            document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+
+            // 复制代码展开逻辑
+            document.querySelectorAll('.toggle-code').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetWin = document.getElementById(targetId);
+                    
+                    if (targetWin.classList.contains('open')) {
+                        targetWin.classList.remove('open');
+                        updateBtnText(this, false);
+                    } else {
+                        targetWin.classList.add('open');
+                        updateBtnText(this, true);
+                    }
+                });
+            });
+
+            // 复制链接
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    navigator.clipboard.writeText(url).then(() => {
+                        showToast();
+                    });
+                });
+            });
+        });
+
+        function toggleLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateContent();
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            document.getElementById('theme-btn').innerText = currentTheme === 'light' ? 'DARK' : 'LIGHT';
+        }
+
+        function updateContent() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('toast-msg').innerText = data.toast_msg;
+
+            const mapping = {
+                '[data-key="title"]': data.title,
+                '[data-key="desc"]': data.desc,
+                '[data-key="p1_title"]': data.p1_title,
+                '[data-key="p1_desc"]': data.p1_desc,
+                '[data-key="p2_title"]': data.p2_title,
+                '[data-key="p2_desc"]': data.p2_desc,
+                '[data-key="p3_title"]': data.p3_title,
+                '[data-key="p3_desc"]': data.p3_desc,
+                '[data-key="p4_title"]': data.p4_title,
+                '[data-key="p4_desc"]': data.p4_desc,
+                '[data-key="p5_title"]': data.p5_title,
+                '[data-key="p5_desc"]': data.p5_desc,
+                '[data-key="p6_title"]': data.p6_title,
+                '[data-key="p6_desc"]': data.p6_desc,
+                '[data-key="p7_title"]': data.p7_title,
+                '[data-key="p7_desc"]': data.p7_desc,
+                '[data-key="btn_github"]': data.btn_github,
+                '[data-key="back_home"]': data.back_home
+            };
+
+            for (const [selector, text] of Object.entries(mapping)) {
+                document.querySelectorAll(selector).forEach(el => el.innerText = text);
+            }
+            
+            document.querySelectorAll('[data-key="btn_copy"]').forEach(el => el.innerText = data.btn_copy);
+            
+            // 更新当前状态下的源码按钮文字
+            document.querySelectorAll('.toggle-code').forEach(btn => {
+                const targetId = btn.getAttribute('data-target');
+                const isOpen = document.getElementById(targetId).classList.contains('open');
+                updateBtnText(btn, isOpen);
+            });
+        }
+
+        function updateBtnText(btn, isOpen) {
+            const span = btn.querySelector('span');
+            span.innerText = isOpen ? i18n[currentLang].btn_hide : i18n[currentLang].btn_view;
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function initAudio(){
+            const audio=document.getElementById('bgm');
+            const btn=document.getElementById('play-btn');
+            if(!audio||!btn)return;
+            const pi=btn.querySelector('.play-icon');
+            const pa=btn.querySelector('.pause-icon');
+            const eq=document.getElementById('player-eq');
+            document.getElementById('music-player').classList.add('show');
+            let userPaused=false;
+            function toggleIcons(){pi.style.display=audio.paused?'block':'none';pa.style.display=audio.paused?'none':'block';}
+            function forcePlay(){
+                if(userPaused)return;
+                const p=audio.play();
+                if(p!==undefined){p.then(()=>{eq.classList.remove('paused');toggleIcons();}).catch(()=>{eq.classList.add('paused');toggleIcons();});}
+            }
+            audio.muted=false;
+            forcePlay();
+            audio.addEventListener('loadedmetadata',forcePlay,{once:true});
+            const interactResume=(e)=>{
+                if(e.target===btn||btn.contains(e.target))return;
+                if(audio.paused&&!userPaused)forcePlay();
+            };
+            ['pointerdown','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,interactResume,{once:true}));
+            btn.addEventListener('click',(e)=>{
+                e.stopPropagation();
+                audio.muted=false;
+                if(audio.paused){
+                    userPaused=false;
+                    audio.play().then(()=>{eq.classList.remove('paused');toggleIcons();}).catch(()=>{});
+                }else{
+                    audio.pause();userPaused=true;eq.classList.add('paused');toggleIcons();
+                }
+            });
+        }
+
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = e.clientX + 'px';
+            });
+            const hoverables = document.querySelectorAll('a, button, .trigger-hover, .project-card, .btn-large');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+    </script>
+
+<!-- ===== Liquid Glass (shuding/liquid-glass adaptation) | Aurora | Motion (Lenis + Motion One + Splitting) ===== -->
+<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com" crossorigin>
+<link rel="dns-prefetch" href="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<script src="assets/liquid-glass.js"></script>
+<style id="lg-style">
+:root{--lg-tint:rgba(255,255,255,.28);--lg-hi:rgba(255,255,255,.85);--lg-shadow:96,74,20}
+[data-theme="dark"]{--lg-tint:rgba(255,255,255,.06);--lg-hi:rgba(190,240,215,.26);--lg-shadow:0,0,0}
+/* ===== Vanta CELLS backdrop + persistent shell ===== */
+#bg-vanta{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55}
+[data-theme="dark"] #bg-vanta{opacity:1}
+.kck-shell-iframe{position:fixed;inset:0;width:100vw;height:100vh;border:0;z-index:5;background:transparent}
+body.kck-child{background:transparent!important}
+html:has(body.kck-child){background:transparent!important}
+body.kck-child .music-player,body.kck-child #bg-vanta{display:none!important}
+.music-player{position:fixed;bottom:104px;right:32px;background:var(--glass,rgba(255,252,244,.65));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border,rgba(212,168,83,.35));border-radius:50px;padding:10px 24px 10px 10px;display:flex;align-items:center;gap:14px;z-index:600;box-shadow:var(--shadow,0 12px 34px rgba(96,74,20,.16));transform:translateY(120px);transition:transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+.music-player.show{transform:translateY(0)}
+.play-btn-wrap{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;cursor:none;flex-shrink:0;transition:transform 0.3s}
+.play-btn-wrap:hover{transform:scale(1.1)}
+.play-btn-wrap svg{width:14px;height:14px;fill:#fff}
+.player-eq{display:flex;gap:2px;height:16px;align-items:flex-end}
+.eq-bar{width:2px;background:var(--accent);border-radius:1px;animation:eqAnim 1.1s ease-in-out infinite}
+.eq-bar:nth-child(2){animation-delay:0.15s;height:6px}
+.eq-bar:nth-child(3){animation-delay:0.3s;height:8px}
+.eq-bar:nth-child(4){animation-delay:0.45s;height:4px}
+.eq-bar:nth-child(5){animation-delay:0.6s;height:10px}
+.player-eq.paused .eq-bar{animation:none;height:2px}
+@keyframes eqAnim{0%,100%{height:3px}50%{height:14px}}
+.player-label{font-size:10px;letter-spacing:2px;color:var(--text-muted,#8a7a55);text-transform:uppercase;white-space:nowrap}
+audio{display:none}
+/* v25 readability: global text shadow */
+body{text-shadow:0 1px 2px rgba(0,0,0,.14),0 0 6px rgba(255,255,255,.10)}
+[data-theme="dark"] body{text-shadow:0 1px 3px rgba(0,0,0,.55)}
+h1,h2,h3,.hero-name,.logo{text-shadow:0 2px 6px rgba(0,0,0,.18)}
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] .hero-name,[data-theme="dark"] .logo{text-shadow:0 2px 8px rgba(0,0,0,.6)}
+
+.lg-plate{position:relative;border-radius:22px;border:0;background:linear-gradient(135deg,rgba(255,252,244,.40),rgba(255,255,255,.16) 55%,rgba(255,248,235,.28));-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(16px) saturate(190%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 1px rgba(212,168,83,.18),inset 0 0 70px rgba(212,168,83,.08),0 30px 80px rgba(var(--lg-shadow),.24)}
+.lg-plate::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(135deg,rgba(255,255,255,1),rgba(212,168,83,.75) 30%,rgba(212,168,83,.15) 55%,rgba(255,255,255,.75));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none;z-index:1}
+[data-theme="dark"] .lg-plate{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03) 55%,rgba(255,255,255,.06));box-shadow:inset 0 1px 0 rgba(150,225,185,.25),inset 0 -1px 1px rgba(120,200,160,.08),0 24px 70px rgba(0,0,0,.30)}
+[data-theme="dark"] .lg-plate::before{background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(212,168,83,.30) 32%,transparent 58%,rgba(255,255,255,.16))}
+/* content ON a plate: crisp, no double backdrop sampling */
+.lg-plate .blog-card,.lg-plate .news-card,.lg-plate .link-card,.lg-plate .about-card,.lg-plate .project-card,.lg-plate .res-card,.lg-plate .code-window{background:var(--lg-tint);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 12px 34px rgba(var(--lg-shadow),.12)}
+.lg-plate .btn,.lg-plate .btn-danger,.lg-plate .toggle-code,.lg-plate .copy-btn,.lg-plate .hero-portal-btn,.lg-plate .btn-large,.lg-plate .play-btn-wrap,.lg-plate .blog-more,.lg-plate .news-more,.lg-plate .back-link{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* ===== Liquid Glass Dock ===== */
+.lg-dock{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;display:flex;gap:4px;padding:10px 14px;border-radius:999px;background:var(--lg-tint);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:0 18px 50px rgba(var(--lg-shadow),.18)}
+.lg-dock::before{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 1px 1px 1px var(--lg-hi),inset -1px -1px 1px rgba(255,255,255,.25),inset 0 0 14px rgba(255,255,255,.12);pointer-events:none;z-index:1}
+.lg-dock::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--lg-hi),rgba(212,168,83,.35) 38%,transparent 62%,rgba(255,255,255,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none;z-index:1}
+.lg-dock a{position:relative;z-index:2;padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:1.5px;color:var(--text,var(--text-main,#1a1a1a));text-decoration:none;opacity:.75;transition:opacity .3s,background .3s}
+.lg-dock a:hover{opacity:1;background:rgba(212,168,83,.14)}
+.lg-dock a:active{transform:scale(.94)}
+@media(max-width:640px){.lg-dock{gap:0;padding:8px 10px;bottom:14px}.lg-dock a{padding:7px 10px;font-size:11px;letter-spacing:.5px}}
+/* ===== Sheen sweep (all cards) ===== */
+.lg-sheen{position:relative;overflow:hidden;-webkit-backdrop-filter:blur(12px) saturate(150%);backdrop-filter:blur(12px) saturate(150%)}
+.lg-sheen::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.22) 46%,rgba(255,255,255,.06) 54%,transparent 68%);transform:translateX(-130%) skewX(-6deg);transition:transform 1s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:2}
+.lg-sheen:hover::after{transform:translateX(130%) skewX(-6deg)}
+.lg-plate .lg-sheen{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* ===== Button glass material: EVERY button, EVERYWHERE ===== */
+.btn,.btn-danger,.toggle-code,.copy-btn,.w-btn,.hero-portal-btn,.btn-large,.back-link,.blog-more,.news-more,.play-btn-wrap{border-radius:999px;background:var(--lg-tint);-webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.22),0 6px 22px rgba(var(--lg-shadow),.12);transition:transform .3s,box-shadow .3s}
+.btn:hover,.btn-danger:hover,.toggle-code:hover,.copy-btn:hover,.w-btn:hover,.hero-portal-btn:hover,.btn-large:hover,.back-link:hover,.blog-more:hover,.news-more:hover,.play-btn-wrap:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.35),0 10px 30px rgba(var(--lg-shadow),.18)}
+.btn:active,.btn-danger:active,.toggle-code:active,.copy-btn:active,.w-btn:active,.hero-portal-btn:active,.btn-large:active,.back-link:active,.blog-more:active,.news-more:active,.play-btn-wrap:active{transform:scale(.95)}
+/* nav buttons live under mix-blend difference: tint only, no backdrop-filter */
+.nav-btn{border-radius:999px;background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.40),inset 0 0 0 1px rgba(255,255,255,.22);transition:transform .3s}
+.nav-btn:active{transform:scale(.93)}
+/* ===== v5 layout fixes ===== */
+.lg-plate{margin-bottom:36px}
+footer.lg-plate{margin-top:36px;margin-bottom:0}
+/* hero margins -> moved to v8 block below */
+body{padding-bottom:96px}
+nav.nav-solid{mix-blend-mode:normal;left:50%;transform:translateX(-50%);top:12px;width:min(1000px,calc(100% - 40px));padding:12px 32px;background:var(--lg-tint);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 30px rgba(var(--lg-shadow),.14);color:var(--text-main,#1a1a1a)}
+nav.nav-solid a,nav.nav-solid .logo,nav.nav-solid .nav-btn{color:var(--text-main,#1a1a1a)}
+[data-theme="dark"] nav.nav-solid a,[data-theme="dark"] nav.nav-solid .logo,[data-theme="dark"] nav.nav-solid .nav-btn{color:#ececec}
+@media(max-width:768px){.lg-plate{-webkit-backdrop-filter:blur(9px) saturate(150%)!important;backdrop-filter:blur(9px) saturate(150%)!important}}
+/* ===== v5 perf: lighter plate blur ===== */
+/* ===== v6 fixes: button text, borders, player position ===== */
+button.w-btn-primary,a.w-btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 22px rgba(var(--lg-shadow),.18)}
+button.w-btn-primary:hover{background:var(--accent-deep,var(--accent));border-color:var(--accent-deep,var(--accent));color:#fff}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;white-space:nowrap;flex-shrink:0}
+.back-link::after{display:none}
+.nav-btn{padding:9px 16px;white-space:nowrap;flex-shrink:0;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.38),inset 0 1px 0 rgba(255,255,255,.45)}
+.blog-more,.news-more{padding:9px 16px;width:fit-content;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 0 0 1px rgba(212,168,83,.35),0 4px 14px rgba(var(--lg-shadow),.10)}
+.logo{white-space:nowrap;flex-shrink:0}
+.music-player{bottom:104px}
+/* ===== reduced motion: static backdrop ===== */
+@media (prefers-reduced-motion:reduce){#bg-vanta{display:none}.lg-sheen::after{display:none}}
+/* ===== v8 fixes ===== */
+/* nav links: never stack characters vertically on narrow screens */
+.nav-link,.lg-dock a{white-space:nowrap}
+/* touch devices: kill custom cursor circle, restore native pointers */
+@media (hover:none),(pointer:coarse){
+  #cursor{display:none!important}
+  body{cursor:auto!important}
+  a,button,.btn,.w-btn,.play-btn-wrap,.nav-btn,.nav-link,.blog-card,.link-card,.portal-card,.res-card,.project-card,.news-card,.about-card,.toggle-code,.copy-btn{cursor:pointer!important}
+}
+/* plates: keep off the screen edges (left/right breathing room) */
+.lg-plate{margin-left:auto;margin-right:auto;width:calc(100% - 28px)}
+footer.lg-plate{margin-top:36px;margin-bottom:0}
+/* hero: start below the floating nav, no overlap */
+header.hero.lg-plate{margin:76px 18px 40px;min-height:calc(100vh - 134px);width:auto}
+/* section dividers: push down inside the plate */
+section.lg-plate{padding-top:84px}.lg-plate .section-divider{margin-top:0}
+/* play button: restore solid gold (v4 glass tint overrode it -> white icon on light glass = invisible) */
+.music-player .play-btn-wrap{background:var(--accent);border-radius:50%;-webkit-backdrop-filter:none;backdrop-filter:none}
+.music-player .play-btn-wrap svg{fill:#fff}
+/* balance long button text wrapping on narrow screens */
+.hero-portal-btn,.btn-large{text-wrap:balance}
+
+/* ===== v13: DeepSeek-style navbar transition ===== */
+nav{transition:transform .45s cubic-bezier(.33,0,.2,1),background .35s ease,box-shadow .35s ease,padding .35s ease}
+nav.nav-hidden{transform:translateY(-120%)}
+nav.nav-solid.nav-hidden{transform:translate(-50%,-140%)}
+@media (prefers-reduced-motion:reduce){nav{transition:none}nav.nav-hidden,nav.nav-solid.nav-hidden{transform:none}}
+/* ===== v9 fixes ===== */
+/* back-top button: stack ABOVE the music player (player: bottom 104 + ~56h) */
+#back-top{bottom:180px}
+@media(max-width:768px){#back-top{right:16px;bottom:176px;padding:12px}}
+/* nav: compact on small screens so EN/DARK buttons never overflow */
+@media(max-width:640px){
+  nav{padding:14px 12px}
+  nav.nav-solid{width:calc(100% - 20px);padding:10px 12px}
+  .logo{font-size:18px}
+  .nav-left{gap:12px}
+  .nav-links{gap:10px}
+  .nav-link{font-size:10px;letter-spacing:1px}
+  .nav-actions,.nav-controls{gap:8px}
+  .nav-btn,#lang-btn,#theme-btn{padding:5px 9px;font-size:10px;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+  .logo{font-size:15px}
+  nav .back-link{padding:5px 9px;font-size:10px;letter-spacing:.5px}
+}
+@media(max-width:419px){nav .back-link{display:none}}
+</style>
+<div class="lg-dock" id="lg-dock" role="navigation" aria-label="Quick navigation"><a href="index.html">主页</a><a href="resources.html">资源中心</a><a href="https://github.com/343188619" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+<script src="https://fastly.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js"></script>
+<script>
+(function(){
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ===== kck persistent shell: cross-page BGM + Vanta CELLS ===== */
+  var IN_IFRAME=(function(){try{return window.self!==window.top;}catch(e){return true;}})();
+  if(IN_IFRAME){
+    document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');if(/^(https?:)?\/\//.test(h))return;e.preventDefault();e.stopPropagation();try{window.parent.postMessage({type:'kck-nav',url:h},'*');}catch(err){}},true);
+    try{new MutationObserver(function(){try{window.parent.postMessage({type:'kck-sync',theme:document.body.getAttribute('data-theme')},'*');}catch(err){}}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+    window.addEventListener('load',function(){try{window.parent.postMessage({type:'kck-loaded',title:document.title},'*');}catch(e){}});
+  }else{
+    try{
+      var _vo=function(){var dk=document.body.getAttribute('data-theme')==='dark';return dk?{color1:0x1f9468,color2:0x3cd6a0,backgroundColor:0x114734,size:1.6,speed:1.4}:{color1:0x2fae8a,color2:0xd9efe2,backgroundColor:0xeef6f0,size:2.7,speed:2.5};};
+      var _rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var _vinit=function(){try{if(window.__vanta){window.__vanta.destroy();window.__vanta=null;}}catch(err){}
+        if(_rm)return;var _o=_vo();
+        try{window.__vanta=VANTA.CELLS({el:document.getElementById('bg-vanta'),THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color1:_o.color1,color2:_o.color2,backgroundColor:_o.backgroundColor,size:_o.size,speed:_o.speed});}catch(err){}};
+      if(!_rm){
+        _vinit();
+        try{new MutationObserver(function(){_vinit();}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+      }
+    }catch(e){}
+    var _frame=null,_hidden=[],_shellTitle=null;
+    var _isInternal=function(h){return h&&h.slice(-5)==='.html'&&!/^(https?:)?\/\//.test(h);};
+    var _hideAll=function(){_hidden=[];Array.prototype.forEach.call(document.body.children,function(el){if(el.hasAttribute('data-kck-persist'))return;_hidden.push(el);el.style.display='none';});};
+    var _unshell=function(){if(_frame){_frame.remove();_frame=null;}if(_shellTitle)document.title=_shellTitle;_hidden.forEach(function(el){el.style.display='';});_hidden=[];};
+    var _shellNav=function(url){
+      if(!_isInternal(url))return;
+      if(url===location.pathname.split('/').pop())return;
+      if(!_shellTitle)_shellTitle=document.title;
+      try{history.pushState({kckShell:true,url:url},'',url);}catch(e){}
+      if(!_frame){_hideAll();_frame=document.createElement('iframe');_frame.className='kck-shell-iframe';_frame.setAttribute('title','content');document.body.appendChild(_frame);}
+      try{_frame.contentWindow.location.replace(url);}catch(e){_frame.src=url;}
+    };
+    window.addEventListener('message',function(ev){var d=ev.data||{};if(!d||!d.type)return;if(d.type==='kck-nav')_shellNav(d.url);else if(d.type==='kck-loaded'){document.title=d.title||document.title;}else if(d.type==='kck-sync'){document.body.setAttribute('data-theme',d.theme);}});
+    window.addEventListener('popstate',function(ev){var s=ev.state;if(s&&s.kckShell){if(_frame){try{_frame.contentWindow.location.replace(s.url);}catch(e){_frame.src=s.url;}}else{_shellNav(s.url);}}else if(_frame){_unshell();}});
+    document.addEventListener('click',function(e){if(_frame)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');e.preventDefault();e.stopPropagation();_shellNav(h);},true);
+  }
+  try{var nv=document.querySelector('nav');if(nv){var onS=function(){nv.classList.toggle('nav-solid',window.scrollY>60)};window.addEventListener('scroll',onS,{passive:true});onS();}}catch(e){}
+  /* 1) BIG GLASS PLATES: true SDF refraction on every major section */
+  try{if(window.LiquidGlass){
+    var plates=document.querySelectorAll('body>.container,footer');
+    plates.forEach(function(el){el.classList.add('lg-plate');});
+    plates.forEach(function(el){LiquidGlass.apply(el,{strength:0.28,bezelRatio:0.07,blur:10,saturate:1.6});});
+    document.querySelectorAll('.lg-dock').forEach(function(el){LiquidGlass.apply(el,{strength:0.30,bezelRatio:0.15,blur:12,saturate:1.6});});
+  }}catch(e){}
+  try{document.querySelectorAll('.project-card,.res-card,.link-card,.blog-card,.news-card,.about-card,.code-window').forEach(function(el){el.classList.add('lg-sheen');});}catch(e){}
+  /* 2) inertial smooth scroll */
+  try{if(window.Lenis&&!reduced){var lenis=new Lenis({lerp:.12});window.__lenis=lenis;var raf=function(t){lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);}}catch(e){}
+  try{document.querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href');if(h.length>1){a.addEventListener('click',function(e){var t=document.querySelector(h);if(t){e.preventDefault();if(window.__lenis){window.__lenis.scrollTo(t,{offset:-90});}else{t.scrollIntoView({behavior:'smooth'});}}});}});}catch(e){}
+  /* 3) hero title char cascade */
+  try{if(window.Splitting&&window.Motion&&!reduced){
+    ['.page-header h1'].forEach(function(s){document.querySelectorAll(s).forEach(function(el){Splitting({target:el,by:'chars'});});});
+    var chars=document.querySelectorAll('.char');chars.forEach(function(c){c.style.display='inline-block';});
+    Motion.animate(chars,{opacity:[0,1],transform:['translateY(.7em)','translateY(0em)']},{duration:.9,delay:Motion.stagger(.04),easing:[.22,1,.36,1]});
+  }}catch(e){}
+  /* 4) dock entrance + magnetic buttons */
+  try{if(window.Motion&&!reduced){
+    var dock=document.getElementById('lg-dock');
+    if(dock){Motion.animate(dock,{opacity:[0,1],transform:['translateX(-50%) translateY(90px)','translateX(-50%) translateY(0px)']},{duration:1,delay:.4,easing:[.22,1,.36,1]});}
+    document.querySelectorAll('.nav-btn,.hero-portal-btn,.btn-large,.back-link,.w-btn,.lg-dock a').forEach(function(el){
+      el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();var x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;Motion.animate(el,{transform:'translate('+(x*8).toFixed(1)+'px,'+(y*6).toFixed(1)+'px)'},{duration:.4,easing:[.22,1,.36,1]});});
+      el.addEventListener('mouseleave',function(){Motion.animate(el,{transform:'translate(0px,0px)'},{duration:.6,easing:[.22,1,.36,1]});});
+    });
+  }}catch(e){}
+})();
+</script>
+</body>
+</html>

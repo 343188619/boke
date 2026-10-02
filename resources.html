@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Library — System Images & Tools | Kang Chaokai</title>
+    <meta name="description" content="康朝凯（Kang Chaokai）的资源中心：精选 Windows 11 / Windows 10 / Windows 7 原版系统镜像磁力链接（MSDN 版本）与实用工具下载，注重性能与稳定性。">
+    <meta name="keywords" content="康朝凯, Kang Chaokai, 资源中心, Windows 11 镜像, Windows 10 镜像, Windows 7, 系统镜像下载, MSDN 原版, 磁力链接, 实用工具">
+    <meta name="author" content="康朝凯">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="theme-color" content="#eef6f0">
+    <meta name="theme-color" content="#0a1611" media="(prefers-color-scheme: dark)">
+    <link rel="canonical" href="https://kangchaokai.top/resources.html">
+    <link rel="alternate" hreflang="zh-CN" href="https://kangchaokai.top/resources.html">
+    <link rel="alternate" hreflang="en-US" href="https://kangchaokai.top/resources.html?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://kangchaokai.top/resources.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0d0d'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-weight='700' text-anchor='middle' fill='%23d4a853'%3EK%3C/text%3E%3C/svg%3E">
+    <meta property="og:title" content="资源中心 - 系统镜像与实用工具下载 | 康朝凯">
+    <meta property="og:description" content="精选 Windows 原版系统镜像磁力链接与实用工具下载，注重性能与稳定性。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kangchaokai.top/resources.html">
+    <meta property="og:site_name" content="康朝凯个人博客">
+    <meta property="og:image" content="https://kangchaokai.top/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="康朝凯个人博客 — 资源中心">
+    <meta property="og:locale" content="zh_CN">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="资源中心 | 康朝凯 Kang Chaokai">
+    <meta name="twitter:description" content="精选 Windows 原版系统镜像磁力链接与实用工具下载。">
+    <meta name="twitter:image" content="https://kangchaokai.top/og-image.png">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://kangchaokai.top/"},{"@type":"ListItem","position":2,"name":"资源中心","item":"https://kangchaokai.top/resources.html"}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"资源中心 - 系统镜像与实用工具下载","url":"https://kangchaokai.top/resources.html","inLanguage":"zh-CN","isPartOf":{"@type":"WebSite","name":"康朝凯个人博客","url":"https://kangchaokai.top/"},"about":{"@type":"Person","name":"康朝凯","alternateName":"Kang Chaokai","url":"https://kangchaokai.top/"}}</script>
+    <link rel="preconnect" href="https://miaoda.feishu.cn" crossorigin>
+    <link href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- 核心变量（品牌统一：与主页一致的金色系） --- */
+        :root {
+            --bg-color: #fafaf8;
+            --text-main: #1a1a1a;
+            --text-sub: #6f6f6f;
+            --accent: #a87f24;
+            --accent-light: #d4a853;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-border: rgba(212, 168, 83, 0.25);
+            --glass-blur: blur(20px);
+            --cursor-size: 20px;
+            --transition-speed: 0.6s;
+            --font-main: "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+            --font-display: "Noto Serif SC", "Georgia", serif;
+            --danger: #c0392b;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0d0d0d;
+            --text-main: #e8e8e8;
+            --text-sub: #a0a0a0;
+            --accent: #d4a853;
+            --accent-light: #e8c876;
+            --card-bg: rgba(22, 22, 22, 0.6);
+            --card-border: rgba(212, 168, 83, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            transition: background-color var(--transition-speed) cubic-bezier(0.22, 1, 0.36, 1), color var(--transition-speed);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- 自定义鼠标 --- */
+        #cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            border: 1px solid var(--text-main);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        #cursor.hovered {
+            width: 50px;
+            height: 50px;
+            background-color: var(--text-main);
+            opacity: 0.5;
+            border: none;
+        }
+
+        /* --- 导航栏 --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: #fff;
+        }
+
+        .nav-left { display: flex; gap: 20px; align-items: center; }
+        .back-link { 
+            text-decoration: none; 
+            color: inherit; 
+            text-transform: uppercase; 
+            font-size: 12px; 
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .back-link::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 1px; background: #fff; transition: width 0.3s;
+        }
+        .back-link:hover::after { width: 100%; }
+
+        .logo { font-family: var(--font-display); font-weight: 900; font-size: 24px; letter-spacing: 0.5px; color: var(--accent); text-transform: uppercase; }
+        .nav-controls { display: flex; gap: 20px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 页面主体 --- */
+        .container {
+            max-width: 1200px;
+            margin: 150px auto 100px;
+            padding: 0 40px;
+        }
+
+        .page-header {
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 10px;
+        }
+        
+        .page-desc {
+            color: var(--text-sub);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* --- 资源列表布局 --- */
+        .category-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin: 60px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .category-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* --- 资源卡片设计 --- */
+        .res-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: var(--glass-blur);
+            padding: 30px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .res-card:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255, 0.05);
+            border-color: var(--accent);
+        }
+
+        .res-info { flex: 1; padding-right: 20px; }
+        
+        .res-tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-sub);
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            opacity: 0.7;
+        }
+
+        .res-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-family: var(--font-main);
+        }
+
+        .res-meta {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-family: monospace; /* 科技感 */
+        }
+
+        .res-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* --- 按钮设计 --- */
+        .btn {
+            padding: 12px 24px;
+            border: 1px solid var(--text-main);
+            background: transparent;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .btn-icon { width: 14px; height: 14px; fill: currentColor; }
+
+        /* --- 动画类 --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- 弹窗 (Toast & Modal) --- */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: var(--bg-color);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid var(--danger);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active { display: flex; }
+        .modal-overlay.active .modal-box { transform: scale(1); opacity: 1; }
+
+        .modal-title { color: var(--danger); font-size: 1.5rem; margin-bottom: 15px; font-family: var(--font-display); }
+        .modal-btns { margin-top: 30px; display: flex; gap: 15px; justify-content: flex-end; }
+        .btn-danger { border-color: var(--danger); color: var(--danger); }
+        .btn-danger:hover { background: var(--danger); color: #fff; }
+
+        @media (max-width: 768px) {
+            .res-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .res-actions { width: 100%; }
+            .btn { flex: 1; justify-content: center; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.cells.min.js"></script>
+</head>
+<body data-theme="light">
+<div id="bg-vanta" aria-hidden="true" data-kck-persist></div>
+<script>(function(){if(window.self===window.top)return;try{document.body.classList.add('kck-child');}catch(e){}var boot=function(){try{var a=document.getElementById('bgm');if(a)a.remove();var p=document.getElementById('music-player');if(p)p.remove();}catch(e){}};document.addEventListener('DOMContentLoaded',boot);})();</script>
+    <div id="cursor"></div>
+
+    <!-- 导航 -->
+    <nav>
+        <div class="nav-left">
+            <div class="logo">KCK · Resources</div>
+            <a href="index.html" class="back-link trigger-hover" data-key="back_home">&larr; Back Home</a>
+        </div>
+        <div class="nav-controls">
+            <div class="trigger-hover" id="lang-btn">EN</div>
+            <div class="trigger-hover" id="theme-btn">DARK</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 头部 -->
+        <header class="page-header">
+            <h1 class="reveal" data-key="title">Resource Library</h1>
+            <p class="page-desc reveal" data-key="desc">System images and utility tools, provided with verified sources and clear version information.</p>
+        </header>
+
+        <!-- 操作系统 -->
+        <div class="category-title reveal" data-key="cat_os">Operating Systems</div>
+        <div class="resource-grid">
+            
+            <!-- Win 11 Business -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Recommended</span>
+                    <div class="res-title">Windows 11 (Business Editions)</div>
+                    <div class="res-meta">Version 25H2 (Dec 2025) · x64 · 7.68 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:c46a16eb293e3386d1e4b717624c83086aae7e02&dn=zh-cn_windows_11_business_editions_version_25h2_updated_dec_2025_x64_dvd_5aa0bca1.iso&xl=8245350400">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 11 Consumer -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Standard</span>
+                    <div class="res-title">Windows 11 (Consumer Editions)</div>
+                    <div class="res-meta">Version 25H2 (Dec 2025) · x64 · 7.76 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:808632e57ba30de8f564ec8e62ffdbe495c7bcae&dn=zh-cn_windows_11_consumer_editions_version_25h2_updated_dec_2025_x64_dvd_115b2867.iso&xl=8330770432">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 10 Business -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Stable</span>
+                    <div class="res-title">Windows 10 (Business Editions)</div>
+                    <div class="res-meta">Version 22H2 (Oct 2025) · x64 · 6.51 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:aed8ca03ed278466c4a35d509bf864051b533011&dn=zh-cn_windows_10_business_editions_version_22h2_updated_oct_2025_x64_dvd_d4e92df7.iso&xl=6985566208">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 10 Consumer -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">LTSC 2021 Base</span>
+                    <div class="res-title">Windows 10 (Consumer / LTSC)</div>
+                    <div class="res-meta">Version 22H2 (Oct 2025) · x64 · 4.70 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:366ADAA52FB3639B17D73718DD5F9E3EE9477B40&dn=SW_DVD9_WIN_ENT_LTSC_2021_64BIT_ChnSimp_MLF_X22-84402.ISO&xl=5044211712">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 7 English -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Legacy</span>
+                    <div class="res-title">Windows 7 Ultimate SP1 (English)</div>
+                    <div class="res-meta">Build 7601.24214 · x64 · 5.47 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:0499F84DB242096F2185E38B696CD3D6C8D0E62C&dn=7601.24214.180801-1700.win7sp1_ldr_escrow_CLIENT_ULTIMATE_x64FRE_en-us.iso&xl=5876357120">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Win 7 Chinese -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag">Legacy</span>
+                    <div class="res-title">Windows 7 Ultimate SP1 (Chinese)</div>
+                    <div class="res-meta">Standard MSDN · x64 · 3.19 GB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn trigger-hover copy-btn" data-link="magnet:?xt=urn:btih:E86414F638E11104248108B155BE9408A8362509&dn=cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso&xl=3420557312">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        <span data-key="btn_magnet">Copy Magnet</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 实用工具 -->
+        <div class="category-title reveal" data-key="cat_tools">Utilities</div>
+        <div class="resource-grid">
+            
+            <!-- Activation Tool -->
+            <div class="res-card reveal">
+                <div class="res-info">
+                    <span class="res-tag" style="border-color: var(--danger); color: var(--danger);">Sensitive</span>
+                    <div class="res-title" data-key="tool_act_title">M365 / Office / Windows Activator</div>
+                    <div class="res-meta" data-key="tool_act_meta">RAR Archive · Comprehensive Activation Suite · 4.9MB</div>
+                </div>
+                <div class="res-actions">
+                    <button class="btn btn-danger trigger-hover" id="activate-dl-btn" data-url="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com/HEU_KMS_Activator_v64.0.0.rar">
+                        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        <span data-key="btn_download">Download</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">KCK</div>
+            <div class="footer-tagline">感谢你的到来，我们一起让世界更绿一点</div>
+            <div class="footer-copy">© 2026 康朝凯. All rights reserved.</div>
+        </div>
+        <div class="music-player" id="music-player" data-kck-persist>
+        <div class="play-btn-wrap" id="play-btn" title="播放/暂停">
+            <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </div>
+        <div class="player-eq" id="player-eq">
+            <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+        </div>
+        <div class="player-label">ATMOS</div>
+    </div>
+
+    <audio id="bgm" loop autoplay playsinline crossorigin="anonymous" preload="auto" data-kck-persist>
+        <source src="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com/yy.mp3" type="audio/mpeg">
+    </audio>
+
+</footer>
+    <style>
+        footer { margin-top: 80px; padding: 48px 24px 40px; border-top: 1px solid var(--card-border); text-align: center; }
+        footer .footer-brand { font-family: var(--font-display); font-weight: 900; font-size: 28px; letter-spacing: 2px; color: var(--accent); }
+        footer .footer-tagline { margin-top: 12px; font-size: 14px; color: var(--text-sub); }
+        footer .footer-copy { margin-top: 8px; font-size: 12px; color: var(--text-sub); opacity: 0.7; }
+    </style>
+
+    <!-- 复制成功提示 (Toast) -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Magnet Link Copied!</span>
+    </div>
+
+    <!-- 病毒警示弹窗 (Modal) -->
+    <div class="modal-overlay" id="virus-modal">
+        <div class="modal-box">
+            <h3 class="modal-title" data-key="modal_title">Security Warning</h3>
+            <p data-key="modal_desc">This file may be identified as a virus by security software due to its activation nature. This is a false positive common with such tools.</p>
+            <br>
+            <p style="font-size: 0.9em; opacity: 0.8;" data-key="modal_sub">Please ensure you trust the source before proceeding. We are not responsible for any misuse.</p>
+            <div class="modal-btns">
+                <button class="btn trigger-hover" id="modal-cancel" data-key="modal_cancel">Cancel</button>
+                <a href="#" id="modal-confirm" class="btn btn-danger trigger-hover" data-key="modal_confirm">I Understand, Download</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. 语言包 ---
+        const i18n = {
+            zh: {
+                langBtn: "EN",
+                title: "资源中心",
+                desc: "提供系统镜像与实用工具的下载，注重来源可靠、版本明确与可直接使用。",
+                cat_os: "操作系统镜像 (OS)",
+                cat_tools: "实用工具 (Utilities)",
+                btn_magnet: "复制磁力链接",
+                btn_download: "下载文件",
+                btn_visit: "访问页面",
+                tool_act_title: "M365 / Office / Windows 激活工具",
+                tool_act_meta: "RAR 压缩包 · 综合激活套件 · 4.9MB",
+                tool_music_title: "音乐下载工具",
+                tool_music_meta: "高品质音源获取工具",
+                toast_msg: "磁力链接已复制！",
+                modal_title: "安全风险提示",
+                modal_desc: "由于激活工具的特性，该文件可能会被杀毒软件误报为病毒。这是此类软件的常见情况。",
+                modal_sub: "请确保您了解风险并暂时关闭防护软件。本站不对使用后果负责。",
+                modal_cancel: "取消",
+                modal_confirm: "忽略警告并下载",
+                back_home: "← 返回首页"
+            },
+            en: {
+                langBtn: "中文",
+                title: "Resource Library",
+                desc: "System images and utility tools, provided with verified sources and clear version information.",
+                cat_os: "Operating Systems",
+                cat_tools: "Utilities",
+                btn_magnet: "Copy Magnet",
+                btn_download: "Download",
+                btn_visit: "Visit Page",
+                tool_act_title: "M365 / Office / Windows Activator",
+                tool_act_meta: "RAR Archive · Comprehensive Activation Suite · 4.9MB",
+                tool_music_title: "Music Downloader",
+                tool_music_meta: "High Quality Audio Source Tool",
+                toast_msg: "Magnet Link Copied!",
+                modal_title: "Security Warning",
+                modal_desc: "This file may be identified as a virus by security software due to its activation nature. This is a false positive.",
+                modal_sub: "Please ensure you trust the source. We are not responsible for any misuse.",
+                modal_cancel: "Cancel",
+                modal_confirm: "I Understand, Download",
+                back_home: "← Back Home"
+            }
+        };
+
+        let currentLang = 'zh'; // 默认中文
+        let currentTheme = 'light';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCursor();
+            initAnimations();
+            updateContent();
+            if(window.self===window.top){initAudio();}
+            setupInteractions();
+        });
+
+        // --- 2. 交互逻辑 ---
+        function setupInteractions() {
+            // 语言切换
+            document.getElementById('lang-btn').addEventListener('click', () => {
+                currentLang = currentLang === 'zh' ? 'en' : 'zh';
+                updateContent();
+            });
+
+            // 主题切换
+            document.getElementById('theme-btn').addEventListener('click', () => {
+                currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', currentTheme);
+                document.getElementById('theme-btn').innerText = currentTheme === 'light' ? 'DARK' : 'LIGHT';
+            });
+
+            // 复制磁力链接
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const link = this.getAttribute('data-link');
+                    navigator.clipboard.writeText(link).then(() => {
+                        showToast();
+                    }).catch(err => {
+                        console.error('Copy failed', err);
+                        alert('Copy failed, please select manually.');
+                    });
+                });
+            });
+
+            // 激活工具弹窗逻辑
+            const modal = document.getElementById('virus-modal');
+            const actBtn = document.getElementById('activate-dl-btn');
+            const cancelBtn = document.getElementById('modal-cancel');
+            const confirmBtn = document.getElementById('modal-confirm');
+
+            actBtn.addEventListener('click', () => {
+                confirmBtn.setAttribute('href', actBtn.getAttribute('data-url'));
+                modal.classList.add('active');
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            
+            confirmBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+                // Allow default link behavior
+            });
+
+            // 点击遮罩层关闭
+            modal.addEventListener('click', (e) => {
+                if(e.target === modal) modal.classList.remove('active');
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // --- 3. 内容更新 ---
+        function updateContent() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('toast-msg').innerText = data.toast_msg;
+
+            const mapping = {
+                '[data-key="title"]': data.title,
+                '[data-key="desc"]': data.desc,
+                '[data-key="cat_os"]': data.cat_os,
+                '[data-key="cat_tools"]': data.cat_tools,
+                '[data-key="tool_act_title"]': data.tool_act_title,
+                '[data-key="tool_act_meta"]': data.tool_act_meta,
+                '[data-key="tool_music_title"]': data.tool_music_title,
+                '[data-key="tool_music_meta"]': data.tool_music_meta,
+                '[data-key="modal_title"]': data.modal_title,
+                '[data-key="modal_desc"]': data.modal_desc,
+                '[data-key="modal_sub"]': data.modal_sub,
+                '[data-key="modal_cancel"]': data.modal_cancel,
+                '[data-key="modal_confirm"]': data.modal_confirm,
+                '[data-key="back_home"]': data.back_home
+            };
+
+            for (const [selector, text] of Object.entries(mapping)) {
+                document.querySelectorAll(selector).forEach(el => el.innerText = text);
+            }
+
+            document.querySelectorAll('[data-key="btn_magnet"]').forEach(el => el.innerText = data.btn_magnet);
+            document.querySelectorAll('[data-key="btn_download"]').forEach(el => el.innerText = data.btn_download);
+            document.querySelectorAll('[data-key="btn_visit"]').forEach(el => el.innerText = data.btn_visit);
+        }
+
+        // --- 4. 动画与光标 ---
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        function initAudio(){
+            const audio=document.getElementById('bgm');
+            const btn=document.getElementById('play-btn');
+            if(!audio||!btn)return;
+            const pi=btn.querySelector('.play-icon');
+            const pa=btn.querySelector('.pause-icon');
+            const eq=document.getElementById('player-eq');
+            document.getElementById('music-player').classList.add('show');
+            let userPaused=false;
+            function toggleIcons(){pi.style.display=audio.paused?'block':'none';pa.style.display=audio.paused?'none':'block';}
+            function forcePlay(){
+                if(userPaused)return;
+                const p=audio.play();
+                if(p!==undefined){p.then(()=>{eq.classList.remove('paused');toggleIcons();}).catch(()=>{eq.classList.add('paused');toggleIcons();});}
+            }
+            audio.muted=false;
+            forcePlay();
+            audio.addEventListener('loadedmetadata',forcePlay,{once:true});
+            const interactResume=(e)=>{
+                if(e.target===btn||btn.contains(e.target))return;
+                if(audio.paused&&!userPaused)forcePlay();
+            };
+            ['pointerdown','touchstart','keydown'].forEach(ev=>document.addEventListener(ev,interactResume,{once:true}));
+            btn.addEventListener('click',(e)=>{
+                e.stopPropagation();
+                audio.muted=false;
+                if(audio.paused){
+                    userPaused=false;
+                    audio.play().then(()=>{eq.classList.remove('paused');toggleIcons();}).catch(()=>{});
+                }else{
+                    audio.pause();userPaused=true;eq.classList.add('paused');toggleIcons();
+                }
+            });
+        }
+
+        function initCursor() {
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.top = e.clientY + 'px';
+                cursor.style.left = e.clientX + 'px';
+            });
+            const hoverables = document.querySelectorAll('a, button, .trigger-hover, .res-card');
+            hoverables.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+            });
+        }
+    </script>
+<!-- ===== Liquid Glass (shuding/liquid-glass adaptation) | Aurora | Motion (Lenis + Motion One + Splitting) ===== -->
+<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com" crossorigin>
+<link rel="dns-prefetch" href="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<script src="assets/liquid-glass.js"></script>
+<style id="lg-style">
+:root{--lg-tint:rgba(255,255,255,.28);--lg-hi:rgba(255,255,255,.85);--lg-shadow:96,74,20}
+[data-theme="dark"]{--lg-tint:rgba(255,255,255,.06);--lg-hi:rgba(190,240,215,.26);--lg-shadow:0,0,0}
+/* ===== Vanta CELLS backdrop + persistent shell ===== */
+#bg-vanta{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55}
+[data-theme="dark"] #bg-vanta{opacity:1}
+.kck-shell-iframe{position:fixed;inset:0;width:100vw;height:100vh;border:0;z-index:5;background:transparent}
+body.kck-child{background:transparent!important}
+html:has(body.kck-child){background:transparent!important}
+body.kck-child .music-player,body.kck-child #bg-vanta{display:none!important}
+.music-player{position:fixed;bottom:104px;right:32px;background:var(--glass,rgba(255,252,244,.65));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border,rgba(212,168,83,.35));border-radius:50px;padding:10px 24px 10px 10px;display:flex;align-items:center;gap:14px;z-index:600;box-shadow:var(--shadow,0 12px 34px rgba(96,74,20,.16));transform:translateY(120px);transition:transform 0.6s cubic-bezier(0.22,1,0.36,1)}
+.music-player.show{transform:translateY(0)}
+.play-btn-wrap{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;cursor:none;flex-shrink:0;transition:transform 0.3s}
+.play-btn-wrap:hover{transform:scale(1.1)}
+.play-btn-wrap svg{width:14px;height:14px;fill:#fff}
+.player-eq{display:flex;gap:2px;height:16px;align-items:flex-end}
+.eq-bar{width:2px;background:var(--accent);border-radius:1px;animation:eqAnim 1.1s ease-in-out infinite}
+.eq-bar:nth-child(2){animation-delay:0.15s;height:6px}
+.eq-bar:nth-child(3){animation-delay:0.3s;height:8px}
+.eq-bar:nth-child(4){animation-delay:0.45s;height:4px}
+.eq-bar:nth-child(5){animation-delay:0.6s;height:10px}
+.player-eq.paused .eq-bar{animation:none;height:2px}
+@keyframes eqAnim{0%,100%{height:3px}50%{height:14px}}
+.player-label{font-size:10px;letter-spacing:2px;color:var(--text-muted,#8a7a55);text-transform:uppercase;white-space:nowrap}
+audio{display:none}
+/* v25 readability: global text shadow */
+body{text-shadow:0 1px 2px rgba(0,0,0,.14),0 0 6px rgba(255,255,255,.10)}
+[data-theme="dark"] body{text-shadow:0 1px 3px rgba(0,0,0,.55)}
+h1,h2,h3,.hero-name,.logo{text-shadow:0 2px 6px rgba(0,0,0,.18)}
+[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3,[data-theme="dark"] .hero-name,[data-theme="dark"] .logo{text-shadow:0 2px 8px rgba(0,0,0,.6)}
+
+.lg-plate{position:relative;border-radius:22px;border:0;background:linear-gradient(135deg,rgba(255,252,244,.40),rgba(255,255,255,.16) 55%,rgba(255,248,235,.28));-webkit-backdrop-filter:blur(12px) saturate(180%);backdrop-filter:blur(16px) saturate(190%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 1px rgba(212,168,83,.18),inset 0 0 70px rgba(212,168,83,.08),0 30px 80px rgba(var(--lg-shadow),.24)}
+.lg-plate::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:linear-gradient(135deg,rgba(255,255,255,1),rgba(212,168,83,.75) 30%,rgba(212,168,83,.15) 55%,rgba(255,255,255,.75));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none;z-index:1}
+[data-theme="dark"] .lg-plate{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03) 55%,rgba(255,255,255,.06));box-shadow:inset 0 1px 0 rgba(150,225,185,.25),inset 0 -1px 1px rgba(120,200,160,.08),0 24px 70px rgba(0,0,0,.30)}
+[data-theme="dark"] .lg-plate::before{background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(212,168,83,.30) 32%,transparent 58%,rgba(255,255,255,.16))}
+/* content ON a plate: crisp, no double backdrop sampling */
+.lg-plate .blog-card,.lg-plate .news-card,.lg-plate .link-card,.lg-plate .about-card,.lg-plate .project-card,.lg-plate .res-card,.lg-plate .code-window{background:var(--lg-tint);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 12px 34px rgba(var(--lg-shadow),.12)}
+.lg-plate .btn,.lg-plate .btn-danger,.lg-plate .toggle-code,.lg-plate .copy-btn,.lg-plate .hero-portal-btn,.lg-plate .btn-large,.lg-plate .play-btn-wrap,.lg-plate .blog-more,.lg-plate .news-more,.lg-plate .back-link{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* ===== Liquid Glass Dock ===== */
+.lg-dock{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;display:flex;gap:4px;padding:10px 14px;border-radius:999px;background:var(--lg-tint);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:0 18px 50px rgba(var(--lg-shadow),.18)}
+.lg-dock::before{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 1px 1px 1px var(--lg-hi),inset -1px -1px 1px rgba(255,255,255,.25),inset 0 0 14px rgba(255,255,255,.12);pointer-events:none;z-index:1}
+.lg-dock::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--lg-hi),rgba(212,168,83,.35) 38%,transparent 62%,rgba(255,255,255,.35));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none;z-index:1}
+.lg-dock a{position:relative;z-index:2;padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:1.5px;color:var(--text,var(--text-main,#1a1a1a));text-decoration:none;opacity:.75;transition:opacity .3s,background .3s}
+.lg-dock a:hover{opacity:1;background:rgba(212,168,83,.14)}
+.lg-dock a:active{transform:scale(.94)}
+@media(max-width:640px){.lg-dock{gap:0;padding:8px 10px;bottom:14px}.lg-dock a{padding:7px 10px;font-size:11px;letter-spacing:.5px}}
+/* ===== Sheen sweep (all cards) ===== */
+.lg-sheen{position:relative;overflow:hidden;-webkit-backdrop-filter:blur(12px) saturate(150%);backdrop-filter:blur(12px) saturate(150%)}
+.lg-sheen::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.22) 46%,rgba(255,255,255,.06) 54%,transparent 68%);transform:translateX(-130%) skewX(-6deg);transition:transform 1s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:2}
+.lg-sheen:hover::after{transform:translateX(130%) skewX(-6deg)}
+.lg-plate .lg-sheen{-webkit-backdrop-filter:none;backdrop-filter:none}
+/* ===== Button glass material: EVERY button, EVERYWHERE ===== */
+.btn,.btn-danger,.toggle-code,.copy-btn,.w-btn,.hero-portal-btn,.btn-large,.back-link,.blog-more,.news-more,.play-btn-wrap{border-radius:999px;background:var(--lg-tint);-webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 0 0 1px rgba(255,255,255,.22),0 6px 22px rgba(var(--lg-shadow),.12);transition:transform .3s,box-shadow .3s}
+.btn:hover,.btn-danger:hover,.toggle-code:hover,.copy-btn:hover,.w-btn:hover,.hero-portal-btn:hover,.btn-large:hover,.back-link:hover,.blog-more:hover,.news-more:hover,.play-btn-wrap:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(255,255,255,.35),0 10px 30px rgba(var(--lg-shadow),.18)}
+.btn:active,.btn-danger:active,.toggle-code:active,.copy-btn:active,.w-btn:active,.hero-portal-btn:active,.btn-large:active,.back-link:active,.blog-more:active,.news-more:active,.play-btn-wrap:active{transform:scale(.95)}
+/* nav buttons live under mix-blend difference: tint only, no backdrop-filter */
+.nav-btn{border-radius:999px;background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.40),inset 0 0 0 1px rgba(255,255,255,.22);transition:transform .3s}
+.nav-btn:active{transform:scale(.93)}
+/* ===== v5 layout fixes ===== */
+.lg-plate{margin-bottom:36px}
+footer.lg-plate{margin-top:36px;margin-bottom:0}
+/* hero margins -> moved to v8 block below */
+body{padding-bottom:96px}
+nav.nav-solid{mix-blend-mode:normal;left:50%;transform:translateX(-50%);top:12px;width:min(1000px,calc(100% - 40px));padding:12px 32px;background:var(--lg-tint);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 30px rgba(var(--lg-shadow),.14);color:var(--text-main,#1a1a1a)}
+nav.nav-solid a,nav.nav-solid .logo,nav.nav-solid .nav-btn{color:var(--text-main,#1a1a1a)}
+[data-theme="dark"] nav.nav-solid a,[data-theme="dark"] nav.nav-solid .logo,[data-theme="dark"] nav.nav-solid .nav-btn{color:#ececec}
+@media(max-width:768px){.lg-plate{-webkit-backdrop-filter:blur(9px) saturate(150%)!important;backdrop-filter:blur(9px) saturate(150%)!important}}
+/* ===== v5 perf: lighter plate blur ===== */
+/* ===== v6 fixes: button text, borders, player position ===== */
+button.w-btn-primary,a.w-btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 22px rgba(var(--lg-shadow),.18)}
+button.w-btn-primary:hover{background:var(--accent-deep,var(--accent));border-color:var(--accent-deep,var(--accent));color:#fff}
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;white-space:nowrap;flex-shrink:0}
+.back-link::after{display:none}
+.nav-btn{padding:9px 16px;white-space:nowrap;flex-shrink:0;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.38),inset 0 1px 0 rgba(255,255,255,.45)}
+.blog-more,.news-more{padding:9px 16px;width:fit-content;white-space:nowrap;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 0 0 1px rgba(212,168,83,.35),0 4px 14px rgba(var(--lg-shadow),.10)}
+.logo{white-space:nowrap;flex-shrink:0}
+.music-player{bottom:104px}
+/* ===== reduced motion: static backdrop ===== */
+@media (prefers-reduced-motion:reduce){#bg-vanta{display:none}.lg-sheen::after{display:none}}
+/* ===== v8 fixes ===== */
+/* nav links: never stack characters vertically on narrow screens */
+.nav-link,.lg-dock a{white-space:nowrap}
+/* touch devices: kill custom cursor circle, restore native pointers */
+@media (hover:none),(pointer:coarse){
+  #cursor{display:none!important}
+  body{cursor:auto!important}
+  a,button,.btn,.w-btn,.play-btn-wrap,.nav-btn,.nav-link,.blog-card,.link-card,.portal-card,.res-card,.project-card,.news-card,.about-card,.toggle-code,.copy-btn{cursor:pointer!important}
+}
+/* plates: keep off the screen edges (left/right breathing room) */
+.lg-plate{margin-left:auto;margin-right:auto;width:calc(100% - 28px)}
+footer.lg-plate{margin-top:36px;margin-bottom:0}
+/* hero: start below the floating nav, no overlap */
+header.hero.lg-plate{margin:76px 18px 40px;min-height:calc(100vh - 134px);width:auto}
+/* section dividers: push down inside the plate */
+section.lg-plate{padding-top:84px}.lg-plate .section-divider{margin-top:0}
+/* play button: restore solid gold (v4 glass tint overrode it -> white icon on light glass = invisible) */
+.music-player .play-btn-wrap{background:var(--accent);border-radius:50%;-webkit-backdrop-filter:none;backdrop-filter:none}
+.music-player .play-btn-wrap svg{fill:#fff}
+/* ===== v12: danger button keeps red outline under glass ===== */
+.btn.btn-danger{background:transparent;border:1.5px solid var(--danger);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 4px 14px rgba(var(--lg-shadow),.10)}
+.btn.btn-danger:hover{background:var(--danger);border-color:var(--danger);color:#fff;box-shadow:0 8px 22px rgba(var(--lg-shadow),.18)}
+.btn.btn-danger:active{transform:scale(.95)}
+
+/* ===== v13: DeepSeek-style navbar transition ===== */
+nav{transition:transform .45s cubic-bezier(.33,0,.2,1),background .35s ease,box-shadow .35s ease,padding .35s ease}
+nav.nav-hidden{transform:translateY(-120%)}
+nav.nav-solid.nav-hidden{transform:translate(-50%,-140%)}
+@media (prefers-reduced-motion:reduce){nav{transition:none}nav.nav-hidden,nav.nav-solid.nav-hidden{transform:none}}
+/* ===== v9 fixes ===== */
+/* back-top button: stack ABOVE the music player (player: bottom 104 + ~56h) */
+#back-top{bottom:180px}
+@media(max-width:768px){#back-top{right:16px;bottom:176px;padding:12px}}
+/* nav: compact on small screens so EN/DARK buttons never overflow */
+@media(max-width:640px){
+  nav{padding:14px 12px}
+  nav.nav-solid{width:calc(100% - 20px);padding:10px 12px}
+  .logo{font-size:18px}
+  .nav-left{gap:12px}
+  .nav-links{gap:10px}
+  .nav-link{font-size:10px;letter-spacing:1px}
+  .nav-actions,.nav-controls{gap:8px}
+  .nav-btn,#lang-btn,#theme-btn{padding:5px 9px;font-size:10px;letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+  .logo{font-size:15px}
+  nav .back-link{padding:5px 9px;font-size:10px;letter-spacing:.5px}
+}
+@media(max-width:419px){nav .back-link{display:none}}
+</style>
+<div class="lg-dock" id="lg-dock" role="navigation" aria-label="Quick navigation"><a href="index.html">主页</a><a href="opensource.html">开源实验室</a></div>
+<script src="https://fastly.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js"></script>
+<script>
+(function(){
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ===== kck persistent shell: cross-page BGM + Vanta CELLS ===== */
+  var IN_IFRAME=(function(){try{return window.self!==window.top;}catch(e){return true;}})();
+  if(IN_IFRAME){
+    document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');if(/^(https?:)?\/\//.test(h))return;e.preventDefault();e.stopPropagation();try{window.parent.postMessage({type:'kck-nav',url:h},'*');}catch(err){}},true);
+    try{new MutationObserver(function(){try{window.parent.postMessage({type:'kck-sync',theme:document.body.getAttribute('data-theme')},'*');}catch(err){}}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+    window.addEventListener('load',function(){try{window.parent.postMessage({type:'kck-loaded',title:document.title},'*');}catch(e){}});
+  }else{
+    try{
+      var _vo=function(){var dk=document.body.getAttribute('data-theme')==='dark';return dk?{color1:0x1f9468,color2:0x3cd6a0,backgroundColor:0x114734,size:1.6,speed:1.4}:{color1:0x2fae8a,color2:0xd9efe2,backgroundColor:0xeef6f0,size:2.7,speed:2.5};};
+      var _rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var _vinit=function(){try{if(window.__vanta){window.__vanta.destroy();window.__vanta=null;}}catch(err){}
+        if(_rm)return;var _o=_vo();
+        try{window.__vanta=VANTA.CELLS({el:document.getElementById('bg-vanta'),THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color1:_o.color1,color2:_o.color2,backgroundColor:_o.backgroundColor,size:_o.size,speed:_o.speed});}catch(err){}};
+      if(!_rm){
+        _vinit();
+        try{new MutationObserver(function(){_vinit();}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+      }
+    }catch(e){}
+    var _frame=null,_hidden=[],_shellTitle=null;
+    var _isInternal=function(h){return h&&h.slice(-5)==='.html'&&!/^(https?:)?\/\//.test(h);};
+    var _hideAll=function(){_hidden=[];Array.prototype.forEach.call(document.body.children,function(el){if(el.hasAttribute('data-kck-persist'))return;_hidden.push(el);el.style.display='none';});};
+    var _unshell=function(){if(_frame){_frame.remove();_frame=null;}if(_shellTitle)document.title=_shellTitle;_hidden.forEach(function(el){el.style.display='';});_hidden=[];};
+    var _shellNav=function(url){
+      if(!_isInternal(url))return;
+      if(url===location.pathname.split('/').pop())return;
+      if(!_shellTitle)_shellTitle=document.title;
+      try{history.pushState({kckShell:true,url:url},'',url);}catch(e){}
+      if(!_frame){_hideAll();_frame=document.createElement('iframe');_frame.className='kck-shell-iframe';_frame.setAttribute('title','content');document.body.appendChild(_frame);}
+      try{_frame.contentWindow.location.replace(url);}catch(e){_frame.src=url;}
+    };
+    window.addEventListener('message',function(ev){var d=ev.data||{};if(!d||!d.type)return;if(d.type==='kck-nav')_shellNav(d.url);else if(d.type==='kck-loaded'){document.title=d.title||document.title;}else if(d.type==='kck-sync'){document.body.setAttribute('data-theme',d.theme);}});
+    window.addEventListener('popstate',function(ev){var s=ev.state;if(s&&s.kckShell){if(_frame){try{_frame.contentWindow.location.replace(s.url);}catch(e){_frame.src=s.url;}}else{_shellNav(s.url);}}else if(_frame){_unshell();}});
+    document.addEventListener('click',function(e){if(_frame)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');e.preventDefault();e.stopPropagation();_shellNav(h);},true);
+  }
+  try{var nv=document.querySelector('nav');if(nv){var onS=function(){nv.classList.toggle('nav-solid',window.scrollY>60)};window.addEventListener('scroll',onS,{passive:true});onS();}}catch(e){}
+  /* 1) BIG GLASS PLATES: true SDF refraction on every major section */
+  try{if(window.LiquidGlass){
+    var plates=document.querySelectorAll('body>.container,footer');
+    plates.forEach(function(el){el.classList.add('lg-plate');});
+    plates.forEach(function(el){LiquidGlass.apply(el,{strength:0.28,bezelRatio:0.07,blur:10,saturate:1.6});});
+    document.querySelectorAll('.lg-dock,.modal-box').forEach(function(el){LiquidGlass.apply(el,{strength:0.30,bezelRatio:0.15,blur:12,saturate:1.6});});
+  }}catch(e){}
+  try{document.querySelectorAll('.project-card,.res-card,.link-card,.blog-card,.news-card,.about-card,.code-window').forEach(function(el){el.classList.add('lg-sheen');});}catch(e){}
+  /* 2) inertial smooth scroll */
+  try{if(window.Lenis&&!reduced){var lenis=new Lenis({lerp:.12});window.__lenis=lenis;var raf=function(t){lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);}}catch(e){}
+  try{document.querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href');if(h.length>1){a.addEventListener('click',function(e){var t=document.querySelector(h);if(t){e.preventDefault();if(window.__lenis){window.__lenis.scrollTo(t,{offset:-90});}else{t.scrollIntoView({behavior:'smooth'});}}});}});}catch(e){}
+  /* 3) hero title char cascade */
+  try{if(window.Splitting&&window.Motion&&!reduced){
+    ['.page-header h1'].forEach(function(s){document.querySelectorAll(s).forEach(function(el){Splitting({target:el,by:'chars'});});});
+    var chars=document.querySelectorAll('.char');chars.forEach(function(c){c.style.display='inline-block';});
+    Motion.animate(chars,{opacity:[0,1],transform:['translateY(.7em)','translateY(0em)']},{duration:.9,delay:Motion.stagger(.04),easing:[.22,1,.36,1]});
+  }}catch(e){}
+  /* 4) dock entrance + magnetic buttons */
+  try{if(window.Motion&&!reduced){
+    var dock=document.getElementById('lg-dock');
+    if(dock){Motion.animate(dock,{opacity:[0,1],transform:['translateX(-50%) translateY(90px)','translateX(-50%) translateY(0px)']},{duration:1,delay:.4,easing:[.22,1,.36,1]});}
+    document.querySelectorAll('.nav-btn,.hero-portal-btn,.btn-large,.back-link,.w-btn,.lg-dock a').forEach(function(el){
+      el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();var x=(e.clientX-r.left-r.width/2)/r.width,y=(e.clientY-r.top-r.height/2)/r.height;Motion.animate(el,{transform:'translate('+(x*8).toFixed(1)+'px,'+(y*6).toFixed(1)+'px)'},{duration:.4,easing:[.22,1,.36,1]});});
+      el.addEventListener('mouseleave',function(){Motion.animate(el,{transform:'translate(0px,0px)'},{duration:.6,easing:[.22,1,.36,1]});});
+    });
+  }}catch(e){}
+})();
+</script>
+</body>
+</html>

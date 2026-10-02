@@ -1,0 +1,27 @@
+# robots.txt for kangchaokai.top
+# 康朝凯个人博客 — 环保 · 科技 · 生态
+
+User-agent: *
+Allow: /
+
+# 常见搜索引擎明确允许
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: YisouSpider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+# 站点地图
+Sitemap: https://kangchaokai.top/sitemap.xml

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — 页面未找到 | Kang Chaokai</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="author" content="康朝凯">
+    <meta name="theme-color" content="#eef6f0">
+    <meta name="theme-color" content="#0a1611" media="(prefers-color-scheme: dark)">
+    <link rel="canonical" href="https://kangchaokai.top/404.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232fae8a'/%3E%3Ctext x='32' y='42' font-size='30' font-family='Georgia' font-weight='bold' text-anchor='middle' fill='%23fff'%3EK%3C/text%3E%3C/svg%3E">
+    <style>
+        :root{--accent:#2fae8a;--text-main:#1d2a24;--text-muted:#5c6f66;--glass:rgba(255,255,255,.55);--border:rgba(47,174,138,.30);--shadow:0 20px 60px rgba(20,60,45,.16)}
+        [data-theme="dark"]{--text-main:#e8f2ec;--text-muted:#9ab5a8;--glass:rgba(20,28,24,.5);--border:rgba(47,174,138,.25);--shadow:0 20px 60px rgba(0,0,0,.5)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{min-height:100%}
+        body{font-family:'Georgia','Noto Serif SC',serif;color:var(--text-main);display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+        #bg-vanta{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.6}
+        [data-theme="dark"] #bg-vanta{opacity:1}
+        body.kck-child{background:transparent!important}
+        body.kck-child .music-player,body.kck-child #bg-vanta{display:none!important}
+        .nf-card{position:relative;max-width:640px;width:100%;border-radius:24px;padding:72px 56px 60px;text-align:center;background:linear-gradient(135deg,rgba(255,255,255,.42),rgba(255,255,255,.16) 55%,rgba(240,250,244,.30));border:1px solid var(--border);backdrop-filter:blur(16px) saturate(170%);-webkit-backdrop-filter:blur(16px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),var(--shadow)}
+        [data-theme="dark"] .nf-card{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03) 55%,rgba(255,255,255,.06))}
+        .nf-code{font-size:clamp(88px,20vw,150px);font-weight:900;line-height:1;letter-spacing:4px;background:linear-gradient(135deg,var(--accent),#57c9a4 55%,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 10px rgba(20,80,60,.25))}
+        .nf-title{margin-top:18px;font-size:24px;font-weight:700;text-shadow:0 2px 6px rgba(0,0,0,.16)}
+        .nf-desc{margin-top:14px;font-size:15px;line-height:1.9;color:var(--text-muted);text-shadow:0 1px 2px rgba(0,0,0,.14)}
+        .nf-actions{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+        .nf-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:999px;font-size:14px;letter-spacing:1px;text-decoration:none;color:var(--text-main);background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 8px 24px rgba(20,60,45,.12);transition:transform .3s,box-shadow .3s}
+        .nf-btn:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 12px 30px rgba(20,60,45,.2)}
+        .nf-btn:active{transform:scale(.96)}
+        .nf-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+        .nf-theme{position:absolute;top:22px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--glass);color:var(--text-main);font-size:11px;letter-spacing:1px;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+        .music-player{position:fixed;bottom:104px;right:32px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:50px;padding:10px 24px 10px 10px;display:flex;align-items:center;gap:14px;z-index:600;box-shadow:var(--shadow)}
+        .play-btn-wrap{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:transform .3s}
+        .play-btn-wrap:hover{transform:scale(1.1)}
+        .play-btn-wrap svg{width:14px;height:14px;fill:#fff}
+        .player-label{font-size:10px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;white-space:nowrap}
+        audio{display:none}
+        @media(max-width:560px){.nf-card{padding:56px 28px 48px}.music-player{bottom:24px;right:16px}}
+    </style>
+</head>
+<body data-theme="light">
+<div id="bg-vanta" aria-hidden="true" data-kck-persist></div>
+<script>(function(){if(window.self===window.top)return;try{document.body.classList.add('kck-child');}catch(e){}var boot=function(){try{var a=document.getElementById('bgm');if(a)a.remove();var p=document.getElementById('music-player');if(p)p.remove();}catch(e){}};document.addEventListener('DOMContentLoaded',boot);})();</script>
+
+<main class="nf-card">
+    <button class="nf-theme" id="nf-theme" title="Theme">DARK</button>
+    <div class="nf-code">404</div>
+    <h1 class="nf-title" data-zh="页面迷失在生态里" data-en="Lost in the Wild">页面迷失在生态里</h1>
+    <p class="nf-desc" data-zh="你要找的页面不存在，或已被移动。就像物种消失一样——可惜这里没有复活计划，只有一个可靠的返回按钮。" data-en="The page you are looking for does not exist or has been moved. Unlike extinct species, there is no revival program here — only a reliable way back.">你要找的页面不存在，或已被移动。就像物种消失一样——可惜这里没有复活计划，只有一个可靠的返回按钮。</p>
+    <nav class="nf-actions">
+        <a class="nf-btn primary" href="index.html" data-zh="返回首页" data-en="Back Home">返回首页</a>
+        <a class="nf-btn" href="opensource.html" data-zh="开源实验室" data-en="Open Source Lab">开源实验室</a>
+        <a class="nf-btn" href="resources.html" data-zh="资源中心" data-en="Resources">资源中心</a>
+    </nav>
+</main>
+
+<div class="music-player" id="music-player" data-kck-persist>
+    <div class="play-btn-wrap" id="play-btn" title="播放/暂停">
+        <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="pause-icon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </div>
+    <div class="player-label">ATMOS</div>
+</div>
+<audio id="bgm" loop autoplay playsinline crossorigin="anonymous" preload="auto" data-kck-persist>
+    <source src="https://dalanben-1469609211.cos.ap-hongkong.myqcloud.com/yy.mp3" type="audio/mpeg">
+</audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.cells.min.js"></script>
+<script>
+(function(){
+  var IN_IFRAME=(function(){try{return window.self!==window.top;}catch(e){return true;}})();
+  if(IN_IFRAME){
+    document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');if(/^(https?:)?\/\//.test(h))return;e.preventDefault();e.stopPropagation();try{window.parent.postMessage({type:'kck-nav',url:h},'*');}catch(err){}},true);
+    try{new MutationObserver(function(){try{window.parent.postMessage({type:'kck-sync',theme:document.body.getAttribute('data-theme')},'*');}catch(err){}}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+    window.addEventListener('load',function(){try{window.parent.postMessage({type:'kck-loaded',title:document.title},'*');}catch(e){}});
+  }else{
+    try{
+      var _vo=function(){var dk=document.body.getAttribute('data-theme')==='dark';return dk?{color1:0x1f9468,color2:0x3cd6a0,backgroundColor:0x114734,size:1.6,speed:1.4}:{color1:0x2fae8a,color2:0xd9efe2,backgroundColor:0xeef6f0,size:2.7,speed:2.5};};
+      var _rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var _vinit=function(){try{if(window.__vanta){window.__vanta.destroy();window.__vanta=null;}}catch(err){}
+        if(_rm)return;var _o=_vo();
+        try{window.__vanta=VANTA.CELLS({el:document.getElementById('bg-vanta'),THREE:window.THREE,mouseControls:true,touchControls:true,gyroControls:false,minHeight:200,minWidth:200,scale:1,scaleMobile:1,color1:_o.color1,color2:_o.color2,backgroundColor:_o.backgroundColor,size:_o.size,speed:_o.speed});}catch(err){}};
+      if(!_rm){
+        _vinit();
+        try{new MutationObserver(function(){_vinit();}).observe(document.body,{attributes:true,attributeFilter:['data-theme']});}catch(err){}
+      }
+    }catch(e){}
+    var _frame=null,_hidden=[],_shellTitle=null;
+    var _isInternal=function(h){return h&&h.slice(-5)==='.html'&&!/^(https?:)?\/\//.test(h);};
+    var _hideAll=function(){_hidden=[];Array.prototype.forEach.call(document.body.children,function(el){if(el.hasAttribute('data-kck-persist'))return;_hidden.push(el);el.style.display='none';});};
+    var _unshell=function(){if(_frame){_frame.remove();_frame=null;}if(_shellTitle)document.title=_shellTitle;_hidden.forEach(function(el){el.style.display='';});_hidden=[];};
+    var _shellNav=function(url){
+      if(!_isInternal(url))return;
+      if(url===location.pathname.split('/').pop())return;
+      if(!_shellTitle)_shellTitle=document.title;
+      try{history.pushState({kckShell:true,url:url},'',url);}catch(e){}
+      if(!_frame){_hideAll();_frame=document.createElement('iframe');_frame.className='kck-shell-iframe';_frame.setAttribute('title','content');document.body.appendChild(_frame);}
+      try{_frame.contentWindow.location.replace(url);}catch(e){_frame.src=url;}
+    };
+    window.addEventListener('message',function(ev){var d=ev.data||{};if(!d||!d.type)return;if(d.type==='kck-nav')_shellNav(d.url);else if(d.type==='kck-loaded'){document.title=d.title||document.title;}else if(d.type==='kck-sync'){document.body.setAttribute('data-theme',d.theme);}});
+    window.addEventListener('popstate',function(ev){var s=ev.state;if(s&&s.kckShell){if(_frame){try{_frame.contentWindow.location.replace(s.url);}catch(e){_frame.src=s.url;}}else{_shellNav(s.url);}}else if(_frame){_unshell();}});
+    document.addEventListener('click',function(e){if(_frame)return;var t=e.target;if(!t||!t.closest)return;var a=t.closest('a[href$=".html"]');if(!a)return;var h=a.getAttribute('href');e.preventDefault();e.stopPropagation();_shellNav(h);},true);
+    /* player */
+    var audio=document.getElementById('bgm'),btn=document.getElementById('play-btn');
+    if(audio&&btn){
+      var pi=btn.querySelector('.play-icon'),pa=btn.querySelector('.pause-icon'),userPaused=false;
+      function toggleIcons(){pi.style.display=audio.paused?'block':'none';pa.style.display=audio.paused?'none':'block';}
+      function forcePlay(){if(userPaused)return;var p=audio.play();if(p!==undefined){p.then(toggleIcons).catch(function(){});}}
+      audio.muted=false;forcePlay();
+      audio.addEventListener('loadedmetadata',forcePlay,{once:true});
+      var ir=function(e){if(e.target===btn||btn.contains(e.target))return;if(audio.paused&&!userPaused)forcePlay();};
+      ['pointerdown','touchstart','keydown'].forEach(function(ev){document.addEventListener(ev,ir,{once:true});});
+      btn.addEventListener('click',function(e){e.stopPropagation();audio.muted=false;if(audio.paused){userPaused=false;audio.play().then(toggleIcons).catch(function(){});}else{audio.pause();userPaused=true;toggleIcons();}});
+    }
+    /* theme */
+    var tb=document.getElementById('nf-theme');
+    if(tb){tb.addEventListener('click',function(){var dk=document.body.getAttribute('data-theme')==='dark';document.body.setAttribute('data-theme',dk?'light':'dark');tb.innerText=dk?'DARK':'LIGHT';});}
+  }
+})();
+</script>
+</body>
+</html>
